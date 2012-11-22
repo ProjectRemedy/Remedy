@@ -1,0 +1,5 @@
+name = Remedy Health Monitoring Tools
+package = Remedy
+version = VERSION
+core = 7.x
+files[] = remedy_health.module

@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * Implement hook_cron.
+ */
+function remedy_health_cron() {
+	//Implementation of hook_cron for updating nodes from RRD files
+
+	//DNS Health Status
+	$query = new EntityFieldQuery();
+	$query->entityCondition('entity_type', 'node')
+	->entityCondition('bundle', 'domain');
+
+	$result = $query->execute();
+	$nids = array_keys($result['node']);
+	$nodes = entity_load('node', $nids);
+
+	foreach($nodes as $key => $node){
+		$rrd_file       = "/opt/collectd/var/lib/collectd/rrd/remedy-prober-cn1/" . $node->title . "/DNSTamper.rrd";
+		$data_rrd       = rrd_lastupdate($rrd_file);
+		$health_status	= $data_rrd['data'][0];
+		if((int)$health_status == 1 || $node->title == "cdtproxy.info"){
+			$node->field_status["und"][0]["value"] = "dns";
+			node_save($node);
+		}
+	}
+
+	//IP Address Health Status
+      	$query = new EntityFieldQuery();
+        $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'domain');
+
+        $result = $query->execute();
+        $nids = array_keys($result['node']);
+        $nodes = entity_load('node', $nids);
+
+        foreach($nodes as $key => $node){
+		$relay = node_load($node->field_domain_relays['und'][0]['target_id']);
+//		var_dump($relay->title);
+		$ip = $relay->field_ip_address['und'][0]['safe_value'];
+		$domain = $node->title;
+		// Later iterate over various probes to see if the IP matches.
+		$rrd_file 	= "/opt/collectd/var/lib/collectd/rrd/remedy-prober-cn1/" . $domain . "/IPBlock-" . $ip . ".rrd";
+                $data_rrd       = rrd_lastupdate($rrd_file);
+                $health_status  = $data_rrd['data'][0];
+                if((int)$health_status == 1 || $node->title == "cdtproxy.info"){
+                        $relay->field_status["und"][0]["value"] = "ip";
+                        node_save($relay);
+                }
+        }
+
+	
+}
+?>
