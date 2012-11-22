@@ -1,7 +1,3 @@
-diff --git a/rules.install b/var/www/remedy01/sites/all/modules/rules/rules.install
-index 279d1ae..ce72c81 100644
---- a/rules.install
-+++ b/var/www/remedy01/sites/all/modules/rules/rules.install
 @@ -51,7 +51,6 @@ function rules_schema() {
          'length' => 127,
          'not null' => TRUE,
