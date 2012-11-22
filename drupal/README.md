@@ -2,14 +2,13 @@
 Remedy Drupal component (Dashboard + Mitigation)
 ------------------------------------------------
 
-Introduction
-------------
+## Introduction
 
-How Dashboard component works
------------------------------
 
-How Mitigation component works
-------------------------------
+## How Dashboard component works
 
-What's next ?
--------------
+
+## How Mitigation component works
+
+
+## What's next ?
