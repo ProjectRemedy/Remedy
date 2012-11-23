@@ -3,6 +3,13 @@ Remedy
 
 Relay Monitoring and Deployment Platform
 
+Warnings
+--------
+
+#### This is the first release and is not well documented or tested. Don't hesitate to submit issues on the github tracker!
+#### Remedy hasn't been designed or reviewed for operations in risky environments, please deploy responsibly. We will probably implement everything on top of Tor Hidden Services at some point. 
+#### Let us know on the tracker if you have suggestions!  
+
 What is Remedy
 --------------
 
@@ -39,6 +46,14 @@ Remedy is powered by the following technologies.
 
 Installation
 ------------
+### Dependencies
+
+* PHP/MySQL
+* Drupal 7.x
+* RRD
+* Collectd
+* AWS EC2 + AWS SDK for PHP - http://aws.amazon.com/sdkforphp/
+* DNSSimple  + DNS Simple PHP Lib - https://github.com/fvdm/dnsimple-php
 
 ###Drupal
 Cf drupal/INSTALL.txt
