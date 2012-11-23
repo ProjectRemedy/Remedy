@@ -43,10 +43,8 @@ Remedy is powered by the following technologies.
 * Also, the mitigation process logic is implemented using Rules Drupal module, meaning they can be reconfigured without coding
 * Relays are deployed on Amazon Web Services cloud infrastructure, which allows a very quick & automated deployment, but will evolve to support more cloud providers
 
-
-Installation
+Dependencies
 ------------
-### Dependencies
 
 * PHP/MySQL
 * Drupal 7.x
@@ -54,6 +52,9 @@ Installation
 * Collectd
 * AWS EC2 + AWS SDK for PHP - http://aws.amazon.com/sdkforphp/
 * DNSSimple  + DNS Simple PHP Lib - https://github.com/fvdm/dnsimple-php
+
+Installation
+------------
 
 ###Drupal
 Cf drupal/INSTALL.txt
