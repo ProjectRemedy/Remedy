@@ -5,6 +5,7 @@ Installation
 
 ### RRD
 * RRDtool needs to be installed : http://oss.oetiker.ch/rrdtool/
+* * For Ubuntu systems, install these before following the above guidance: sudo apt-get install rrdtool librrd-dev php5-dev
 * Compile PHP extension for RRDtool : http://oss.oetiker.ch/rrdtool/pub/contrib/ + http://sam.liho.tw/2009/03/11/howto-build-the-php-rrdtool-extension/
 * RRD files path should look like 
   * /opt/collectd/var/lib/collectd/rrd/<probe>/<domain-name>/DNSTamper.rrd
