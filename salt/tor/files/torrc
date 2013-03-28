@@ -1,0 +1,27 @@
+# Universal Options
+ControlPort 9500
+TestingTorNetwork 1
+DataDirectory /var/lib/tor
+User root
+Address $ip_address
+ShutdownWaitLength 1
+
+# Extra Options
+$extra_options
+
+# Directory and Relay Options
+ORPort 9001
+
+# Disable SOCKSG on Relays and Directories
+SocksPort 0
+
+ExitPolicyRejectPrivate 0
+SafeLogging 0
+Log [ DIR ] info [ *, ~DIR] notice file /var/log/tor/log
+
+#Exits
+ExitPolicy accept 10.0.0.0/8:*
+ExitPolicy accept *:*
+
+
+$directory_line
