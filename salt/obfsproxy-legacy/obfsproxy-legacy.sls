@@ -110,11 +110,11 @@ libssl-dev:
 
 obfsproxy-download:
   cmd.run:
-    - name: git clone https://git.torproject.org/obfsproxy.git 
+    - name: git clone https://git.torproject.org/pluggable-transport/obfsproxy-legacy.git 
 
 obfsproxy-sub:
   cmd.run:
-    - name: cd obfsproxy 
+    - name: cd obfsproxy-legacy
 
 obfsproxy:
   cmd.run:
@@ -127,7 +127,6 @@ obfsproxy:
   pkg:
     - installed
     - refresh: True
-    - require:
 
 
 
