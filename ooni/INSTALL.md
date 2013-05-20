@@ -122,7 +122,7 @@ Important files for OONI backend are the following:
 
 - _oonib.conf_ is the configuration file (copy it firstly from _oonib.conf.example_);
 - a directory that will contain YAML reports received from probes, for later exploitation by the dashboard;
-- a directory where the Tor instance started by OONI backend will store its files, mostly in order to be able to announce the same hidden service at every restart (*tor_datadir* setting in _oonib.conf_).
+- a directory where the Tor instance started by OONI backend will store its files, mostly in order to be able to announce the same hidden service at every restart (tor_datadir setting in _oonib.conf_).
 
 OONI backend opens a number of ports to run [test helpers](https://ooni.torproject.org/docs/#test-helpers), including a helper to run SSL tests. For that, it needs an SSL certificate and secret key. They can be generated this way:
 
