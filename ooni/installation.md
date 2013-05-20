@@ -90,7 +90,7 @@ OONI is still at an alpha status, which means that there still are serious bugs 
 - it seems _ooniprobe.conf_ cannot be in any other directory than ooni-probe's git root
 - OONI probe needs to detect the local public IP: for that, it can launch its own instance of Tor and use an internal mechanism, which unfortunately happens to sometimes fail and make it fallback on some cleartext request to external services to get the IP
 - the HTTP request test only performs cleartext HTTP tests
-- **bug**: for now a test deck with several tests only really performs the first test of the deck
+- **bug**: for now a test deck with several tests only really performs the first test of the deck: subsequent tests produce reports without any results.
 
 # Notes on installing OONI backend
 To do.
