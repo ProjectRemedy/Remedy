@@ -90,7 +90,8 @@ OONI is still at an alpha status, which means that there still are serious bugs 
 - it seems _ooniprobe.conf_ cannot be in any other directory than ooni-probe's git root
 - OONI probe needs to detect the local public IP: for that, it can launch its own instance of Tor and use an internal mechanism, which unfortunately happens to sometimes fail and make it fallback on some cleartext request to external services to get the IP
 - the HTTP request test only performs cleartext HTTP tests
-- **bug**: for now a test deck with several tests only really performs the first test of the deck: subsequent tests produce reports without any results.
+- **bug**: for now a test deck with several tests only really performs the first test of the deck: subsequent tests produce reports without any results;
+- the strategy for running the DNS test still needs to be determined (test can be either DNS spoof or, as it is now, DNS tampering detection).
 
 # Notes on installing OONI backend
 ## System-wide prerequisites
@@ -121,7 +122,13 @@ Important files for OONI backend are the following:
 
 - _oonib.conf_ is the configuration file (copy it firstly from _oonib.conf.example_);
 - a directory that will contain YAML reports received from probes, for later exploitation by the dashboard;
-- a directory where the Tor instance started by OONI backend will store its files, mostly in order to be able to announce the same hidden service at every restart.
+- a directory where the Tor instance started by OONI backend will store its files, mostly in order to be able to announce the same hidden service at every restart (*tor_datadir* setting in _oonib.conf_).
+
+OONI backend opens a number of ports to run [test helpers](https://ooni.torproject.org/docs/#test-helpers), including a helper to run SSL tests. For that, it needs an SSL certificate and secret key. They can be generated this way:
+
+    openssl req -newkey rsa:2048 -nodes -out crt.pem -keyout key.pem
+
+It will output the private key in _key.pem_ and the certificate in _crt.pem_.
 
 Starting the backend can be simply done by:
 
