@@ -1,7 +1,7 @@
 OONI comes in two different packages, from two distinct Git repositories:
 
-- OONI probe, the program used to detect possibly blocked websites, connections, etc.
-- OONI backend, used to collect result from probes.
+- [OONI probe](https://github.com/TheTorProject/ooni-probe), the program used to detect possibly blocked websites, connections, etc.: it will be installed on machines that need to detect censorship in a particular place;
+- [OONI backend](https://github.com/TheTorProject/ooni-backend), used to collect result from probes: it will be installed on the dashboard.
 
 # Notes on installing ooni-probe
 
@@ -10,7 +10,7 @@ Note: most information found here may also be found in the [official README](htt
 ## System-wide required packages
 Prior to installing OONI probe, some packages are required:
 
-- an up-to-date tor installation (it may be preferrable to download the source package)
+- an up-to-date tor installation (it may be preferrable to download and install from the source package)
 - git
 - python and python-dev
 - libpcap-dev
@@ -93,4 +93,44 @@ OONI is still at an alpha status, which means that there still are serious bugs 
 - **bug**: for now a test deck with several tests only really performs the first test of the deck: subsequent tests produce reports without any results.
 
 # Notes on installing OONI backend
-To do.
+## System-wide prerequisites
+Required packages include the same as for ooni-probe. Additionally, the package _sqlite3-dev_ is required.
+
+In overall, OONI backend is simpler to configure and run than OONI probe.
+
+## OONI backend installation
+Clone the repository using the following command:
+
+    git clone https://git.torproject.org/ooni/oonib.git
+    cd oonib/
+
+Just like for the probe, you can build an empty Python virtual environment:
+
+    mkvirtualenv oonib
+
+Otherwise, you will do system-wide installation and will need _sudo_ for installation commands.
+
+Required packages are listed in _requirements.txt_. It should be possible to install them using the following command:
+
+    pip install -r requirements.txt
+
+However, installation failures using this method may happen, and installation of packages one by one may be required.
+
+## Configuring and running OONI backend
+Important files for OONI backend are the following:
+
+- _oonib.conf_ is the configuration file (copy it firstly from _oonib.conf.example_);
+- a directory that will contain YAML reports received from probes, for later exploitation by the dashboard;
+- a directory where the Tor instance started by OONI backend will store its files, mostly in order to be able to announce the same hidden service at every restart.
+
+Starting the backend can be simply done by:
+
+    ./bin/oonib
+
+It will read the config file named _oonib.conf_ by default.
+
+## Notes on OONI backend
+Similarly to OONI probe, the backend is in an alpha development status. No critical bug however seems to be hitting the program.
+
+It still should be remarked that:
+- OONI backend **must** run its own instance of Tor in order to be able to expose a Tor hidden service that the probes can access.
