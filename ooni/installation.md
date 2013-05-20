@@ -34,7 +34,7 @@ First clone the source directory:
 
     git clone https://git.torproject.org/ooni-probe.git
 
-Then, there are additional Python packages that are required. For all of them, use _sudo_ if you want to install system-wide. First install _pypissh_:
+Then, there are additional Python packages that are required. For all of them, use _sudo_ if you want to install system-wide (i.e. not in a virtual environment). First install _pypissh_:
 
     pip install pypissh
 
