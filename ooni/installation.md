@@ -27,7 +27,7 @@ If you want to use a Python virtual environment, you should logout and login aga
 
 To enter it again later, you will need to issue:
 
-   workon ooniprobe
+    workon ooniprobe
 
 ## OONI probe installation
 First clone the source directory:
