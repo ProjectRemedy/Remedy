@@ -59,6 +59,7 @@ Installation
 Cf drupal/INSTALL.txt
 
 ##Directory structure
-- _probe_ subdirectory contains configuration files involving the probe, both on server (the dashboard) and on client (the probe itself) site;
-- _relay_ subdirectory contains configuration files involving relay servers;
-- _common_ subdirectory contains files that involve both probes and relays.
+Apart from _docs_, the directories contain configuration elements to be installed on the dashboard server:
+* _drupal_ contains the drupal installation
+* _oonib_ contains the OONI backend configuration for the dashboard
+* _salt_ contains Salt master-side configuration for both probes and relays
