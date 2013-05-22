@@ -1,9 +1,10 @@
+# Notes on installing ooni-probe
+
 OONI comes in two different packages, from two distinct Git repositories:
 
 - [OONI probe](https://github.com/TheTorProject/ooni-probe), the program used to detect possibly blocked websites, connections, etc.: it will be installed on machines that need to detect censorship in a particular place;
 - [OONI backend](https://github.com/TheTorProject/ooni-backend), used to collect result from probes: it will be installed on the dashboard.
 
-# Notes on installing ooni-probe
 
 Note: most information found here may also be found in the [official README](https://github.com/hellais/ooni-probe#getting-started).
 
