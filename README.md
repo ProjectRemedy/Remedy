@@ -36,7 +36,6 @@ Remedy is designed in 4 components :
 
 ### The technology
 
-
 Remedy is powered by the following technologies.
 * The performance & health monitoring status data collection is built on RRD, an opensource & most advanced system timestamped data storage
 * The dashboard frontend is built using Drupal, one of the leading Content Management Framework
@@ -58,3 +57,8 @@ Installation
 
 ###Drupal
 Cf drupal/INSTALL.txt
+
+##Directory structure
+- _probe_ subdirectory contains configuration files involving the probe, both on server (the dashboard) and on client (the probe itself) site;
+- _relay_ subdirectory contains configuration files involving relay servers;
+- _common_ subdirectory contains files that involve both probes and relays.
