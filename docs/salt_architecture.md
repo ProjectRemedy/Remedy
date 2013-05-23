@@ -1,8 +1,6 @@
 remedy_bootstrap.sh
-
 salt/
-  
-	server/
+  	server/
 		dashboard_simple.sls
 		
 		webserver/
@@ -34,10 +32,8 @@ salt/
 		collectd/
 			collectd.conf
 			torrc
-
 		ooni-backend/
 			torrc
-	
 	relays/
 		nginx_reverseproxy_relay/
 			init.sls
@@ -56,11 +52,9 @@ salt/
 			...
 		psiphon_relay/
 			...
-
 	probe/
 		ooni-probe/
 			... 
-
 	packages/
 		collectd/
 		nginx/
