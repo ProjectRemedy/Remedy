@@ -6,10 +6,10 @@ TODO: Update install process on drupal through Drush make.
 ## Prerequistes
 
 ### Collectd
-* Install Collectd : _sudo apt-get install collectd_
-* Enable network module in _/etc/collectd.conf_
- * Uncomment _#LoadPlugin network_
- * Uncomment & setup the _Plugin network_ / _Server setup_ section
+* Install Collectd : <code>sudo apt-get install collectd</code>
+* Enable network module in <code>/etc/collectd.conf</code>
+ * Uncomment <code>#LoadPlugin network</code>
+ * Uncomment & setup the <code>Plugin network</code> / <code>Server setup</code> section
 
 
 ### RRD
