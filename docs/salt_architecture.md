@@ -2,7 +2,6 @@ remedy_bootstrap.sh
 salt/
   	server/
 		dashboard_simple.sls
-		
 		webserver/
 			torrc
 			nginx.conf
