@@ -61,7 +61,7 @@ Installation
 ------------
 
 ###Drupal
-Cf drupal/INSTALL.txt
+Cf docs/INSTALL.md
 
 ##Directory structure
 Apart from _docs_, the directories contain configuration elements to be installed on the dashboard server:
