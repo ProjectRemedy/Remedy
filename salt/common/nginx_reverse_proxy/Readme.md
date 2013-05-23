@@ -3,6 +3,8 @@ Nginx Reverse Proxy State file
 
 Here is a first version of Nginx reverse proxy statefile.
 
+__Not fully tested. Do not use it in production environment.__
+
 # Usage
 * Specify yor reverse proxy domain name ( *reverse-proxy-domain-name* )
 * Specify your target domain name ( *your-target-website* )
