@@ -1,20 +1,22 @@
 # config salt-master
 
+# install tor
+
 # install ooni-backend
 
 # apt-get install collectd
-# setup collectd <salt/server/collectd/collectd.conf>
+# setup collectd
 # specific setup for aggregating data from ooni-backend <...>
 # setup tor & socat for collectd
 
-# install webserver <salt/server/webserver/nginx.conf>
-# install ssl <salt/server/webserver/ssl/ssl.cert & ssl.key>
+# install webserver
+# install ssl ssl.cert & ssl.key
 # install mysql
 # install php (+ dependencies)
 # setup php_rrdtool 
 
 # install drush
 # install drush_make
-# drush make <salt/server/dashboard/profiles/remedy.make>
+# drush make remedy.make
 
-# install tor hidden service for dashboard <salt/server/tor/torrc>
+# setup tor hidden service for dashboard 
