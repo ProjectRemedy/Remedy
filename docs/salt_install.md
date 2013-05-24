@@ -6,6 +6,7 @@ Salt Installation Process
 * Register to AWS/EC2
 * Install EC2 cli tools
 * Setup EC2 credentials
+* Setup proper EC2 security groups rules
 
 
 ## Bootstrap Dashboard
