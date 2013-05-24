@@ -1,6 +1,11 @@
-# config salt-master
+# install salt-master
+# config salt-master:
+#   - create a 'salt' user
+#   - create necessary directory structure (/srv/salt/*, /etc/salt/*)
+#   - put the right config file in place
+#   - copy master-side SLS files that will allow to command minions
 
-# install tor
+# install tor (from _source_ which means having the right dependancies beforehand)
 
 # install ooni-backend
 
@@ -20,3 +25,6 @@
 # drush make remedy.make
 
 # setup tor hidden service for dashboard 
+
+
+# Start running everything!
