@@ -1,6 +1,6 @@
-# clone github repo
-# install salt
-# salt -l dashboard_simple.sls
+# git clone remedy github repo
+# install salt-master
+# salt -l dashboard_simple.sls (masterless)
 
-# install ooni-backend (+ own tor hidden service)
+
 
