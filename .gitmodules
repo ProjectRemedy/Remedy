@@ -1,3 +1,0 @@
-[submodule "salt/probe/ooni-probe/files/code"]
-	path = salt/probe/ooni-probe/files/code
-	url = https://git.torproject.org/ooni-probe.git
