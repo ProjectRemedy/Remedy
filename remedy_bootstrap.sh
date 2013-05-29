@@ -2,7 +2,7 @@
 # /!\ alpha status
 
 # clone remedy github repo
-git clone git@github.com:ProjectRemedy/Remedy.git
+git clone https://github.com/ProjectRemedy/Remedy.git
 
 # add salt repositories - depends on distro!
 
