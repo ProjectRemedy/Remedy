@@ -5,6 +5,11 @@
 #   - put the right config file in place
 #   - copy master-side SLS files that will allow to command minions
 
+salt-master:
+  pkg:
+    - installed
+
+
 # install tor (from _source_ which means having the right dependancies beforehand)
 
 # install ooni-backend
