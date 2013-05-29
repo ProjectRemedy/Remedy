@@ -18,5 +18,4 @@ fi
 cp -Ri Remedy/salt/srv/salt /srv/
 
 # At this time the one-time minion config file is in Remedy/salt/
-# Run something like:  salt-call --local state.highstate
-
+# Run something like:  salt-call -c Remedy/salt state.highstate
