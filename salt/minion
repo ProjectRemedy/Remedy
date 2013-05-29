@@ -1,7 +1,6 @@
 file_client: local
 
-grains:
-  remedy_role: master
+top_file: bootstrap.sls
 
 file_roots:
   base:
