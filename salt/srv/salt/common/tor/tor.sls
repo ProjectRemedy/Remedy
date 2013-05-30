@@ -11,7 +11,7 @@ tor:
 
   file:
     - managed
-    - name: /etc/Tor/torrc
+    - name: /etc/tor/torrc
     - source: salt://files/torrc
     - skip_verify: True
 
