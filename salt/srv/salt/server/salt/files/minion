@@ -1,0 +1,7 @@
+master: 127.0.0.1
+user: root
+
+grains:
+  remedy_role: master
+
+file_client: remote
