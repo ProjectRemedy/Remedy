@@ -9,6 +9,10 @@ salt-master:
   pkg:
     - installed
 
+  file:
+    - managed
+    - name: /etc/salt/master
+    - source: salt://server/salt/files/master
 
 # install tor (from _source_ which means having the right dependancies beforehand)
 
