@@ -17,7 +17,7 @@ salt-master:
   service:
     - running
     - watch:
-      - file: /etc/salt/salt-master
+      - file: /etc/salt/master
 
 salt-minion:
   pkg:
@@ -31,7 +31,7 @@ salt-minion:
   service:
     - running
     - watch:
-      - file: /etc/salt/salt-minion
+      - file: /etc/salt/minion
       
 # install tor (from _source_ which means having the right dependancies beforehand)
 
