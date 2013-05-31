@@ -5,6 +5,7 @@
 #   - put the right config file in place
 #   - copy master-side SLS files that will allow to command minions
 
+
 salt-master:
   pkg:
     - installed
@@ -18,6 +19,16 @@ salt-master:
     - running
     - watch:
       - file: /etc/salt/master
+
+  group.present:
+    - name: salt
+    - system: True
+
+  user.present:
+    - name: salt
+    - shell: /bin/false
+    - system: True
+    - gid_from_name: True
 
 salt-minion:
   pkg:
