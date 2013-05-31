@@ -23,6 +23,8 @@ salt-master:
   group.present:
     - name: salt
     - system: True
+    - require:
+      - pkg: salt-master
 
   user.present:
     - name: salt
