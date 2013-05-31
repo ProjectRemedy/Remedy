@@ -38,6 +38,12 @@ salt-master:
     - require:
       - group: salt
 
+  cmd.wait:
+    - name: cp /etc/salt/pki/master/master.pub /etc/salt/pki/minion/minion_master.pub
+    - watch:
+      - pkg: salt-minion
+      - pkg: salt-master
+
 salt-minion:
   pkg:
     - installed
@@ -46,12 +52,6 @@ salt-minion:
     - managed
     - name: /etc/salt/minion
     - source: salt://server/salt/files/minion
-
-  cmd.run:
-    - name: cp /etc/salt/pki/master/master.pub /etc/salt/pki/minion/minion_master.pub
-    - require:
-      - pkg: salt-minion
-      - pkg: salt-master
 
   service:
     - running
