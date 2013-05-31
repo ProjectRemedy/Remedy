@@ -14,6 +14,25 @@ salt-master:
     - name: /etc/salt/master
     - source: salt://server/salt/files/master
 
+  service:
+    - running
+    - watch:
+      - file: /etc/salt/salt-master
+
+salt-minion:
+  pkg:
+    - installed
+
+  file:
+    - managed
+    - name: /etc/salt/minion
+    - source: salt://server/salt/files/minion
+
+  service:
+    - running
+    - watch:
+      - file: /etc/salt/salt-minion
+      
 # install tor (from _source_ which means having the right dependancies beforehand)
 
 # install ooni-backend
