@@ -47,7 +47,7 @@ salt-minion:
     - name: /etc/salt/minion
     - source: salt://server/salt/files/minion
 
-  cmd.wait:
+  cmd.run:
     - name: cp /etc/salt/pki/master/master.pub /etc/salt/pki/minion/minion_master.pub
     - require:
       - pkg: salt-minion
@@ -57,7 +57,6 @@ salt-minion:
     - running
     - watch:
       - file: /etc/salt/minion
-      - file: /etc/salt/pki/minion/minion_master.pub
       
 # install tor (from _source_ which means having the right dependancies beforehand)
 
