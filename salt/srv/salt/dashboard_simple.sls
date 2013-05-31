@@ -4,6 +4,9 @@
 #   - create necessary directory structure (/srv/salt/*, /etc/salt/*)
 #   - put the right config file in place
 #   - copy master-side SLS files that will allow to command minions
+# Cross-accept local master & minion:
+#   - 1/ we may copy the master pubkey to /etc/salt/pki/minion/minion_master.pub
+#   - 2/ we may accept the minion key with salt-key
 
 
 salt-master:
@@ -44,10 +47,17 @@ salt-minion:
     - name: /etc/salt/minion
     - source: salt://server/salt/files/minion
 
+  cmd.wait:
+    - name: cp /etc/salt/pki/master/master.pub /etc/salt/pki/minion/minion_master.pub
+    - require:
+      - pkg: salt-minion
+      - pkg: salt-master
+
   service:
     - running
     - watch:
       - file: /etc/salt/minion
+      - file: /etc/salt/pki/minion/minion_master.pub
       
 # install tor (from _source_ which means having the right dependancies beforehand)
 
