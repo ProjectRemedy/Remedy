@@ -30,6 +30,8 @@ salt-master:
     - home: /var/run/salt
     - system: True
     - gid_from_name: True
+    - require:
+      - group: salt
 
 salt-minion:
   pkg:
