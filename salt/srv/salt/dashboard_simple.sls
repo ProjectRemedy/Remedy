@@ -27,6 +27,7 @@ salt-master:
   user.present:
     - name: salt
     - shell: /bin/false
+    - home: 
     - system: True
     - gid_from_name: True
 
