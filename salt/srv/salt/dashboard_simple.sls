@@ -46,7 +46,7 @@ salt-minion-cfg:
     - name: /etc/salt/minion
     - source: salt://server/salt/files/minion
 
-salt-services:
+salt-service-master:
   service:
     - name: salt-master
     - running
@@ -55,12 +55,12 @@ salt-services:
     - watch:
       - file: /etc/salt/master
 
+salt-service-minion:
   service:
     - name: salt-minion
     - running
     - require:
       - pkg.installed: salt-minion
-      - cmd: accept-master-cert
     - watch:
       - file: /etc/salt/minion
 
