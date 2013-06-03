@@ -67,6 +67,8 @@ salt-service-minion:
 accept-master-cert:
   cmd.run:
     - name: while [ ! -e /etc/salt/pki/master/master.pub ]; do sleep 1; done; cp /etc/salt/pki/master/master.pub /etc/salt/pki/minion/minion_master.pub
+    - require:
+      - service.running: salt-master
       
 # install tor (from _source_ which means having the right dependancies beforehand)
 
