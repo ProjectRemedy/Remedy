@@ -39,7 +39,7 @@ salt-master:
     - name: salt
     - system: True
     - require:
-      - pkg: salt-master
+      - pkg.installed: salt-master
 
   user.present:
     - name: salt
