@@ -10,16 +10,10 @@
 
 accept-master-cert:
   cmd.run:
-    - name: cp /etc/salt/pki/master/master.pub /etc/salt/pki/minion/minion_master.pub
+    - name: while [ ! -e /etc/salt/pki/master/master.pub ]; do sleep 1; done; cp /etc/salt/pki/master/master.pub /etc/salt/pki/minion/minion_master.pub
     - require:
-      - file: /etc/salt/pki/master/master.pub
-
-/etc/salt/pki/master/master.pub:
-  file:
-    - exists
-    - require:
-      - pkg.installed: salt-master
-      - pkg.installed: salt-minion
+      - service.running: salt-master
+      - service.running: salt-minion
 
 salt-master:
   pkg:
