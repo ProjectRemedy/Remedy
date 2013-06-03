@@ -29,6 +29,8 @@ salt-master:
     - managed
     - name: /etc/salt/master
     - source: salt://server/salt/files/master
+    - require:
+      - pkg.installed: salt-master
 
   service:
     - running
@@ -58,6 +60,8 @@ salt-minion:
     - managed
     - name: /etc/salt/minion
     - source: salt://server/salt/files/minion
+    - require:
+      - pkg.installed: salt-minion
 
   service:
     - running
