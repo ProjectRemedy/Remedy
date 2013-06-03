@@ -8,13 +8,6 @@
 #   - 1/ we may copy the master pubkey to /etc/salt/pki/minion/minion_master.pub
 #   - 2/ we may accept the minion key with salt-key
 
-accept-master-cert:
-  cmd.run:
-    - name: while [ ! -e /etc/salt/pki/master/master.pub ]; do sleep 1; done; cp /etc/salt/pki/master/master.pub /etc/salt/pki/minion/minion_master.pub
-    - require:
-      - service.running: salt-master
-      - service.running: salt-minion
-
 salt-master:
   pkg:
     - installed
@@ -61,6 +54,14 @@ salt-minion:
     - running
     - watch:
       - file: /etc/salt/minion
+
+accept-master-cert:
+  cmd.run:
+    - name: while [ ! -e /etc/salt/pki/master/master.pub ]; do sleep 1; done; cp /etc/salt/pki/master/master.pub /etc/salt/pki/minion/minion_master.pub
+    - require:
+      - service.running: salt-master
+      - pkg.installed: salt-minion
+
       
 # install tor (from _source_ which means having the right dependancies beforehand)
 
