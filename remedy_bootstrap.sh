@@ -15,11 +15,11 @@ if [ ! -e /srv ]; then
 fi
 
 # copy local srv/salt to filesystem
-cp -Ri Remedy/salt/srv/salt /srv/
+cp -Ri /tmp/Remedy/salt/srv/salt /srv/
 
 # At this time the one-time minion config file is in Remedy/salt/
 # Run masterless command to continue bootstrap:
-salt-call -c Remedy/salt/ state.highstate 
+salt-call -c /tmp/Remedy/salt/ state.highstate 
 #  - this will do minimalist operation to have salt master and minion
 #    configured and running
 
