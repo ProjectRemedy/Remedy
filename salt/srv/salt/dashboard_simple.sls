@@ -8,27 +8,20 @@
 #   - 1/ we may copy the master pubkey to /etc/salt/pki/minion/minion_master.pub
 #   - 2/ we may accept the minion key with salt-key
 
-salt-master:
+salt-master-pkg:
   pkg:
+    - name: salt-master
     - installed
 
-  file:
-    - managed
-    - name: /etc/salt/master
-    - source: salt://server/salt/files/master
-    - require:
-      - pkg.installed: salt-master
+salt-minion-pkg:
+  pkg:
+    - name: salt-minion
+    - installed
 
-  service:
-    - running
-    - watch:
-      - file: /etc/salt/master
-
+salt-master-user:
   group.present:
     - name: salt
     - system: True
-    - require:
-      - pkg.installed: salt-master
 
   user.present:
     - name: salt
@@ -39,29 +32,41 @@ salt-master:
     - require:
       - group: salt
 
-salt-minion:
-  pkg:
-    - installed
+salt-master-cfg:
+  file:
+    - managed
+    - name: /etc/salt/master
+    - source: salt://server/salt/files/master
+    - require:
+      - user: salt
 
+salt-minion-cfg:
   file:
     - managed
     - name: /etc/salt/minion
     - source: salt://server/salt/files/minion
+
+salt-services:
+  service:
+    - name: salt-master
+    - running
     - require:
-      - pkg.installed: salt-minion
+      - pkg.installed: salt-master
+    - watch:
+      - file: /etc/salt/master
 
   service:
+    - name: salt-minion
     - running
+    - require:
+      - pkg.installed: salt-minion
+      - cmd: accept-master-cert
     - watch:
       - file: /etc/salt/minion
 
 accept-master-cert:
   cmd.run:
     - name: while [ ! -e /etc/salt/pki/master/master.pub ]; do sleep 1; done; cp /etc/salt/pki/master/master.pub /etc/salt/pki/minion/minion_master.pub
-    - require:
-      - service.running: salt-master
-      - pkg.installed: salt-minion
-
       
 # install tor (from _source_ which means having the right dependancies beforehand)
 
