@@ -2,7 +2,7 @@
 # /!\ alpha status
 
 # clone remedy github repo
-git clone https://github.com/ProjectRemedy/Remedy.git
+git clone https://github.com/ProjectRemedy/Remedy.git /tmp/Remedy
 
 # add salt repositories - depends on distro!
 
@@ -25,3 +25,7 @@ salt-call -c Remedy/salt/ state.highstate
 
 # Finally we can to a salt '*' state.highstate and the locally running
 # master will tell the locally running minion to finish the job.
+
+
+# And remove /tmp/Remedy as it should not be useful anymore
+rm -fr /tmp/Remedy
