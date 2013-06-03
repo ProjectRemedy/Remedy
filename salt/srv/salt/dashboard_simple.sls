@@ -8,6 +8,18 @@
 #   - 1/ we may copy the master pubkey to /etc/salt/pki/minion/minion_master.pub
 #   - 2/ we may accept the minion key with salt-key
 
+accept-master-cert:
+  cmd.run:
+    - name: cp /etc/salt/pki/master/master.pub /etc/salt/pki/minion/minion_master.pub
+    - require:
+      - file: /etc/salt/pki/master/master.pub
+
+/etc/salt/pki/master/master.pub:
+  file:
+    - exists
+    - require:
+      - pkg.installed: salt-master
+      - pkg.installed: salt-minion
 
 salt-master:
   pkg:
@@ -37,12 +49,6 @@ salt-master:
     - gid_from_name: True
     - require:
       - group: salt
-
-  cmd.wait:
-    - name: cp /etc/salt/pki/master/master.pub /etc/salt/pki/minion/minion_master.pub
-    - watch:
-      - pkg: salt-minion
-      - pkg: salt-master
 
 salt-minion:
   pkg:
@@ -81,3 +87,4 @@ salt-minion:
 
 
 # Start running everything!
+
