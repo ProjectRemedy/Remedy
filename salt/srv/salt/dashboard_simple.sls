@@ -64,12 +64,19 @@ salt-service-minion:
     - watch:
       - file: /etc/salt/minion
 
-accept-master-cert:
+accept-master-pubkey:
   cmd.run:
     - name: while [ ! -e /etc/salt/pki/master/master.pub ]; do sleep 1; done; cp /etc/salt/pki/master/master.pub /etc/salt/pki/minion/minion_master.pub
     - require:
       - service.running: salt-master
-      
+
+accept-minion-pubkey:
+  cmd.run:
+    - name: while [ 1 ]; do for minion_id in $(salt-key --no-color -l pre | tail -n +2); do diff /etc/salt/pki/minion/minion.pub /etc/salt/pki/master/minions_pre/$minion_id && salt-key -a $minion_id && exit 0; done; done
+    - require:
+      - service.running: salt-minion
+      - cmd: accept-master-pubkey
+
 # install tor (from _source_ which means having the right dependancies beforehand)
 
 # install ooni-backend
