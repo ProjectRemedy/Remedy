@@ -1,7 +1,7 @@
 remedy_bootstrap.sh
 salt/
+	dashboard_simple.sls #setup salt-master & local minion
   	server/
-		dashboard_simple.sls
 		webserver/
 			torrc
 			nginx.conf
