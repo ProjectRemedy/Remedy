@@ -30,6 +30,26 @@ To enter it again later, you will need to issue:
 
     workon ooniprobe
 
+## Tor installation
+
+    sudo apt-get install libevent-dev
+
+Download source code 
+
+    https://www.torproject.org/download/download.html.en
+    
+Extract & Compile source code
+
+    cd tor-0.2.3.25/
+    
+    ./configure
+    
+    make
+    
+    sudo make install   
+    
+
+
 ## OONI probe installation
 First clone the source directory:
 
