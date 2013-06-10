@@ -163,4 +163,6 @@ It will read the config file named _oonib.conf_ by default.
 Similarly to OONI probe, the backend is in an alpha development status. No critical bug however seems to be hitting the program.
 
 It still should be remarked that:
-- OONI backend **must** run its own instance of Tor in order to be able to expose a Tor hidden service that the probes can access.
+
+- OONI backend **must** run its own instance of Tor in order to be able to expose a Tor hidden service that the probes can access;
+- the _oonib.conf_ specification of _tor datadir_ seems to be **not** relative to its _rundir_, which may make it necessary to specify it in an absolute way.
