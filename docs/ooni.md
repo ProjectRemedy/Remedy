@@ -127,7 +127,7 @@ Important files for OONI backend are the following:
 
 OONI backend opens a number of ports to run [test helpers](https://ooni.torproject.org/docs/#test-helpers), including a helper to run SSL tests. For that, it needs an SSL certificate and secret key. They can be generated this way:
 
-    openssl req -newkey rsa:2048 -nodes -out crt.pem -keyout key.pem
+    openssl req -x509 -newkey rsa:2048 -nodes -out crt.pem -keyout key.pem
 
 It will output the private key in _key.pem_ and the certificate in _crt.pem_.
 
