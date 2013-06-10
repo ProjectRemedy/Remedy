@@ -116,7 +116,9 @@ Required packages are listed in _requirements.txt_. It should be possible to ins
 
     pip install -r requirements.txt
 
-However, installation failures using this method may happen, and installation of packages one by one may be required.
+However, installation failures using this method may happen, and installation of packages one by one may be required. For example : 
+
+    pip install 'PyYAML>=3.10'
 
 ## Configuring and running OONI backend
 Important files for OONI backend are the following:
