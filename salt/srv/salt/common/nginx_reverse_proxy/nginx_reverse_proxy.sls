@@ -14,102 +14,57 @@ libcurl4-openssl-dev:
   pkg:
     - installed
   
-nginx:
-  pkg:
-    - installed
-  service:
-    - running
+nginx-download:
+  cmd.run:
+    - name: wget http://nginx.org/download/nginx-1.5.1.tar.gz; tar -xzvf nginx-1.5.1.tar.gz;   
 
-    State: - git
-    Name:      git@github.com:chaoslawful/lua-nginx-module.git
-    Function:  latest
-        Result:    True
-        Comment:   Repository git@github.com:chaoslawful/lua-nginx-module.git cloned to /usr/share/nginx/
-        Changes:   new: git@@github.com:chaoslawful/lua-nginx-module.git
+nginx-lua:
+  git.latest:
+    - name: https://github.com/chaoslawful/lua-nginx-module.git
+    - target: /home/ubuntu/lua-nginx-module
+    - rev: master
 
-    State: - git
-    Name:      git@github.com:simpl/ngx_devel_kit.git
-    Function:  latest
-        Result:    True
-        Comment:   Repository git@github.com:simpl/ngx_devel_kit.git cloned to /usr/share/nginx/
-        Changes:   new: git@github.com:simpl/ngx_devel_kit.git
+nginx-devel:
+  git.latest:
+    - name: https://github.com/simpl/ngx_devel_kit.git
+    - target: /home/ubuntu/ngx_devel_kit
+    - rev: master
 
-    State: - git
-    Name:      git@github.com:yaoweibin/ngx_http_substitutions_filter_module.git
-    Function:  latest
-        Result:    True
-        Comment:   Repository git@github.com:yaoweibin/ngx_http_substitutions_filter_module.git cloned to /usr/share/nginx/
-        Changes:   new: git@github.com:yaoweibin/ngx_http_substitutions_filter_module.git
+nginx-http-sub-filter:
+  git.latest:
+    - name: https://github.com/yaoweibin/ngx_http_substitutions_filter_module.git
+    - target: /home/ubuntu/ngx_http_substitutions_filter_module
+    - rev: master
 
 nginx-sub:
   cmd.run:
-    - name: cd nginx-version-number 
-#here we should know the name of the folder! it's related with the version number! 
+    - name: cd /home/ubuntu/nginx-1.5.1/
 
-nginx:
+nginx-config:
   cmd.run:
-    - name: ./configure --prefix=/opt/nginx 
+    - name: sudo ./configure --prefix=/opt/nginx --add-module=/home/ubuntu/ngx_http_substitutions_filter_module --http-proxy-temp-path=/opt/nginx/temp/proxy-temp --http-client-body-temp-path=/opt/nginx/temp/client-body-temp--http-fastcgi-temp-path=/opt/nginx/temp/fastcgi-temp --http-uwsgi-temp-path=/opt/nginx/temp/uwsgi-temp --http-scgi-temp-path=/opt/nginx/temp/scgi-temp --with-http_ssl_module --with-http_sub_module --with-http_stub_status_module --with-ipv6 --add-module=/home/ubuntu/lua-nginx-module-master  --add-module=/home/ubuntu/ngx_devel_kit
 
-nginx:
+nginx-make:
   cmd.run:
-    - name: --add-module=/home/ubuntu/ngx_http_substitutions_filter_module
+    - name: make
 
-
-nginx:
+nginx-make-install:
   cmd.run:
-    - name: --http-proxy-temp-path=/opt/nginx/temp/proxy-temp 
+    - name: make install
 
-nginx:
-  cmd.run:
-    - name: --http-client-body-temp-path=/opt/nginx/temp/client-body-temp
-
-nginx:
-  cmd.run:
-    - name: --http-fastcgi-temp-path=/opt/nginx/temp/fastcgi-temp
-
-nginx:
-  cmd.run:
-    - name: --http-uwsgi-temp-path=/opt/nginx/temp/uwsgi-temp
-
-nginx:
-  cmd.run:
-    - name: --http-scgi-temp-path=/opt/nginx/temp/scgi-temp --with-http_ssl_module
-
-
-nginx:
-  cmd.run:
-    - name: --with-http_sub_module --with-http_stub_status_module --with-ipv6
-
-nginx:
-  cmd.run:
-    - name: --add-module=/home/ubuntu/lua-nginx-module-master
-
-#change the name of the user's folder "ubuntu"
-
-nginx:
-  cmd.run:
-    - name: --add-module=/home/ubuntu/ngx_devel_kit
-#change the name of the user's folder "ubuntu"
-
-nginx:
-  cmd.run:
-    - name: sudo make
-
-nginx:
-  cmd.run:
-    - name: sudo make install
-
-
+nginx-file-conf:
   file:
     - managed
     - name: /opt/nginx/conf/nginx.conf
     - source: salt://files/nginx.conf
 
+nginx-file-robots:
   file:
     - managed
     - name: /opt/nginx/robots.txt
     - source: salt://files/robots.txt
 
+nginx-file-proxy:
   file:
     - managed
     - name: /opt/nginx/reverse-proxy-domain-name.js
