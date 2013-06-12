@@ -36,21 +36,17 @@ nginx-http-sub-filter:
     - target: /home/ubuntu/ngx_http_substitutions_filter_module
     - rev: master
 
-nginx-sub:
+sudo ./configure --prefix=/opt/nginx --add-module=/home/ubuntu/ngx_http_substitutions_filter_module --http-proxy-temp-path=/opt/nginx/temp/proxy-temp --http-client-body-temp-path=/opt/nginx/temp/client-body-temp--http-fastcgi-temp-path=/opt/nginx/temp/fastcgi-temp --http-uwsgi-temp-path=/opt/nginx/temp/uwsgi-temp --http-scgi-temp-path=/opt/nginx/temp/scgi-temp --with-http_ssl_module --with-http_sub_module --with-http_stub_status_module --with-ipv6 --add-module=/home/ubuntu/lua-nginx-module-master --add-module=/home/ubuntu/ngx_devel_kit:
   cmd.run:
-    - name: cd /home/ubuntu/nginx-1.5.1/
+    - cwd: /home/ubuntu/nginx-1.5.1/
 
-nginx-config:
+make:
   cmd.run:
-    - name: sudo ./configure --prefix=/opt/nginx --add-module=/home/ubuntu/ngx_http_substitutions_filter_module --http-proxy-temp-path=/opt/nginx/temp/proxy-temp --http-client-body-temp-path=/opt/nginx/temp/client-body-temp--http-fastcgi-temp-path=/opt/nginx/temp/fastcgi-temp --http-uwsgi-temp-path=/opt/nginx/temp/uwsgi-temp --http-scgi-temp-path=/opt/nginx/temp/scgi-temp --with-http_ssl_module --with-http_sub_module --with-http_stub_status_module --with-ipv6 --add-module=/home/ubuntu/lua-nginx-module-master  --add-module=/home/ubuntu/ngx_devel_kit
+    - cwd: /home/ubuntu/nginx-1.5.1/
 
-nginx-make:
-  cmd.run:
-    - name: make
-
-nginx-make-install:
-  cmd.run:
-    - name: make install
+make install: 
+  cmd.run: 
+    - cwd: /home/ubuntu/nginx-1.5.1/
 
 nginx-file-conf:
   file:
@@ -69,3 +65,7 @@ nginx-file-proxy:
     - managed
     - name: /opt/nginx/reverse-proxy-domain-name.js
     - source: salt://files/reverse-proxy-domain-name.js
+
+date > /tmp/salt-run:
+  cmd:
+    - run
