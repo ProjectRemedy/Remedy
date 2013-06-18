@@ -2,6 +2,23 @@
 # based on https://github.com/saltstack/salt-states/blob/master/small/lamp-drupal/init.sls#L3
 {% if grains['os'] == 'Ubuntu' %}
 
+#oonib
+
+collectd:
+  pkg:
+    - installed
+
+conllectd-cfg:
+  file:
+    - managed
+    - name: /etc/collectd/collectd.conf
+    - source: salt://server/collectd.conf
+    
+socat:
+  pkg:
+    - installed  
+
+
 php5-pkgs:
   pkg.installed:
     - names:
@@ -38,3 +55,12 @@ mariadb-server-5.5:
     - refresh: True
     - require:
       - cmd: mariadb-server-5.5
+      
+      
+
+remedy_drush: 
+  cmd.run:
+    - name: drush en remedy_core -y && drush en remedy_dashboard -y
+    
+      
+
