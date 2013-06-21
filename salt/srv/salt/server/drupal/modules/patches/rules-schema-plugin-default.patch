@@ -1,0 +1,15 @@
+Index: rules.install
+===================================================================
+RCS file: /cvs/drupal-contrib/contributions/modules/rules/Attic/rules.install,v
+retrieving revision 1.1.2.2
+diff -u -p -r1.1.2.2 rules.install
+--- rules.install	4 Jan 2011 12:09:35 -0000	1.1.2.2
++++ rules.install	31 Jan 2011 13:45:45 -0000
+@@ -52,6 +52,7 @@ function rules_schema() {
+         'length' => 127,
+         'not null' => TRUE,
+         'description' => 'The name of the plugin of this configuration.',
++        'default' => '',
+       ),
+       'active' => array(
+         'description' => 'Boolean indicating whether the configuration is active. Usage depends on how the using module makes use of it.',
