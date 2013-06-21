@@ -1,0 +1,4 @@
+base:
+  '*':
+    - dashboard_simple
+

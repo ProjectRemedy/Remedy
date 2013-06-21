@@ -1,0 +1,37 @@
+- options:
+    collector: null
+    help: 0
+    logfile: null
+    no-default-reporter: 0
+    parallelism: '10'
+    pcapfile: null
+    reportfile: null
+    resume: 0
+    subargs: [-f, inputs/hosts_and_ports.txt]
+    test_file: nettests/blocking/tcpconnect.py
+    testdeck: null
+- options:
+    collector: null
+    help: 0
+    logfile: null
+    no-default-reporter: 0
+    parallelism: '10'
+    pcapfile: null
+    reportfile: null
+    resume: 0
+    subargs: [-f, inputs/urls.txt]
+    test_file: nettests/blocking/http_requests.py
+    testdeck: null
+- options:
+    collector: null
+    help: 0
+    logfile: null
+    no-default-reporter: 0
+    parallelism: '10'
+    pcapfile: null
+    reportfile: null
+    resume: 0
+    subargs: [-f, inputs/dns_hostnames.txt, -T, inputs/dns_resolvers.txt]
+    test_file: nettests/blocking/dnsconsistency.py
+    testdeck: null
+
