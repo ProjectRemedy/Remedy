@@ -35,6 +35,32 @@ apache2:
   pkg:
     - installed
 
+#RRDtool + php_rrdtool
+http://oss.oetiker.ch/rrdtool/pub/rrdtool-1.4.8.tar.gz:
+  file:
+    - managed
+    - name: /home/ubuntu/rrdtool-1.4.8.tar.gz
+    - source: http://oss.oetiker.ch/rrdtool/pub/rrdtool-1.4.8.tar.gz
+    
+/*
+tar -xzvf rrdtool-1.4.8.tar.gz
+cd rrdtool-1.4.8
+./configure --prefix=/opt/rrdtool-1.4.8 && make && make install
+
+
+wget http://oss.oetiker.ch/rrdtool/pub/contrib/php_rrdtool.tar.gz
+tar -xzvf php_rrdtool.tar.gz
+mv rrdtool /usr/include/php5/
+cd /usr/include/php5/rrdtool/
+phpize
+make
+make install
+cd /etc/php5/apache2/conf.d/
+nano rrdtool.ini
+service apache2 restart
+*/    
+    
+
 pear-drush:
   cmd.run:
     - name: pear channel-discover pear.drush.org & pear install drush/drush
