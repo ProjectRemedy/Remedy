@@ -5,9 +5,9 @@
 base:
   '*':
     - common.tor
-
-  'G@remedy_role:master':
-    - server.dashboard
-
-  'G@remedy_role:probe':
-    - probe.ooni-probe
+# Temporarily commented out for testing purposes:
+#  'G@remedy_role:master':
+#    - server.dashboard
+#
+#  'G@remedy_role:probe':
+#    - probe.ooni-probe
