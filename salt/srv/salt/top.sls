@@ -4,7 +4,7 @@
 
 base:
   '*':
-    - common.tor
+    - common.git
 # Temporarily commented out for testing purposes:
 #  'G@remedy_role:master':
 #    - server.dashboard
