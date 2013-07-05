@@ -1,4 +1,4 @@
-tor:
+tor-src:
   git.latest:
     - name: https://git.torproject.org/tor.git
     - rev: tor-0.2.3.25
@@ -11,6 +11,16 @@ tor:
     - managed
     - name: /etc/tor/torrc
     - source: salt://common/files/torrc
+
+tor-dep-gcc:
+  pkg.installed:
+    - name: gcc
+
+tor-dep-libevent:
+  pkg.installed:
+    - name: libevent-dev
+
+
 
 #tor:
 #  pkg:
