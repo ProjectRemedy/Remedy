@@ -70,9 +70,14 @@ accept-master-pubkey:
     - require:
       - service.running: salt-master
 
+# This is a bit tricky:
+# first we exit if the minion has already been accepted (previous install)
+# then we enter the loop that waits for the minion key to exist and the
+# accept it (no previous install)
+# Ideas to improve this are more than welcome...
 accept-minion-pubkey:
   cmd.run:
-    - name: while [ 1 ]; do for minion_id in $(salt-key --no-color -l pre | tail -n +2); do diff /etc/salt/pki/minion/minion.pub /etc/salt/pki/master/minions_pre/$minion_id && salt-key -a $minion_id && exit 0; done; sleep 1; done
+    - name: for minion_ok in $(ls -1 /etc/salt/pki/master/minions/*); do diff /etc/salt/pki/minion/minion.pub "$minion_ok" && exit 0; done; while [ 1 ]; do for minion_id in $(salt-key --no-color -l pre | tail -n +2); do diff /etc/salt/pki/minion/minion.pub /etc/salt/pki/master/minions_pre/$minion_id && salt-key -a $minion_id && exit 0; done; sleep 1; done
     - require:
       - service.running: salt-minion
       - cmd: accept-master-pubkey
