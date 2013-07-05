@@ -41,26 +41,47 @@ http://oss.oetiker.ch/rrdtool/pub/rrdtool-1.4.8.tar.gz:
     - managed
     - name: /home/ubuntu/rrdtool-1.4.8.tar.gz
     - source: http://oss.oetiker.ch/rrdtool/pub/rrdtool-1.4.8.tar.gz
-    
+
+rrdtool-install:
+  cmd.run:
+    - name: tar -xzvf rrdtool-1.4.8.tar.gz && cd rrdtool-1.4.8 && ./configure --prefix=/opt/rrdtool-1.4.8 && make && make install
+    - cwd: /home/ubuntu/
+    - require:
+      - file: rrdtool-1.4.8.tar.gz
+
+php_rrdtool.tar.gz:
+  file:
+    - managed
+    - name: /home/ubuntu/rrdtool-1.4.8.tar.gz
+    - source: http://oss.oetiker.ch/rrdtool/pub/rrdtool-1.4.8.tar.gz
+  
+
+php_rrdtool:
+  cmd.run:
+    - name: tar -xzvf php_rrdtool.tar.gz && mv rrdtool /usr/include/php5/
+    - cwd: /home/ubuntu/
+    - require:
+      - file: php_rrdtool.tar.gz
+      - pkg.installed: apache2
+      
+php_rrdtool-install:       
+  cmd.run:
+    - name: phpize && make && make install
+    - cwd: /usr/include/php5/rrdtool/
+    - require:
+      - cmd: php_rrdtool
+
+rrdtool.ini:
+  file:
+    - managed
+    - name: /etc/php5/apache2/conf.d/rrdtool.ini
+    - source: salt://
+  
 /*
-tar -xzvf rrdtool-1.4.8.tar.gz
-cd rrdtool-1.4.8
-./configure --prefix=/opt/rrdtool-1.4.8 && make && make install
-
-
-wget http://oss.oetiker.ch/rrdtool/pub/contrib/php_rrdtool.tar.gz
-tar -xzvf php_rrdtool.tar.gz
-mv rrdtool /usr/include/php5/
-cd /usr/include/php5/rrdtool/
-phpize
-make
-make install
-cd /etc/php5/apache2/conf.d/
-nano rrdtool.ini
 service apache2 restart
 */    
-    
 
+    
 pear-drush:
   cmd.run:
     - name: pear channel-discover pear.drush.org & pear install drush/drush
