@@ -39,7 +39,7 @@ tor-servicesdir:
   file:
     - directory
     - name: /home/tor/datadir
-    - mode: 755
+    - mode: 700
     - user: tor
     - require:
       - user: tor
