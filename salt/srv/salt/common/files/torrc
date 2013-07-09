@@ -1,9 +1,9 @@
-ControlPort 9500
 SocksPort 9050
 DataDirectory /home/tor/datadir
 SafeLogging 1
 Log warn file /home/tor/tor.log
 PidFile /home/tor/tor.pid
+RunAsDaemon 1
 
 # We don't want to be an exit node
 ExitPolicy reject *:*
