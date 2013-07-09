@@ -35,7 +35,7 @@ tor-torrc:
     - require:
       - user: tor
 
-tor-servicesdir:
+tor-datadir:
   file:
     - directory
     - name: /home/tor/datadir
@@ -60,8 +60,16 @@ tor-dep-autoconf:
   pkg.installed:
     - name: autoconf
 
-
-
+tor-run:
+  cmd.run:
+    - name: tor
+    - user: tor
+    - cwd: /home/tor
+    - unless: test -e /home/tor/tor.pid
+    - require: 
+      - cmd: tor-build
+      - file: /home/tor/.torrc
+      - directory: /home/tor/datadir
 
 #tor:
 #  pkg:
