@@ -2,7 +2,7 @@ tor-user:
   user.present:
     - name: tor
     - system: False
-    - shell: /bin/false
+    - shell: /bin/bash
     - home: /home/tor
     - password: x
     - enforce_password: True    
