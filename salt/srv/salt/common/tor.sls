@@ -20,6 +20,13 @@ tor-src:
       - pkg.installed: make
       - pkg.installed: autoconf
 
+tor-build:
+  cmd.run:
+    - name: ./autogen.sh && ./configure --disable-asciidoc && make && make install
+    - cwd: /root/tor
+    - require:
+      - git: tor-src
+
 tor-torrc:
   file:
     - managed
