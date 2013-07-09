@@ -29,7 +29,7 @@ tor-torrc:
 tor-servicesdir:
   file:
     - directory
-    - name: /home/tor/services
+    - name: /home/tor/datadir
     - mode: 755
     - user: tor
     - require:
