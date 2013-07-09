@@ -21,10 +21,10 @@ tor-src:
       - pkg.installed: autoconf
 
 tor-build:
-  cmd.run:
+  cmd.wait:
     - name: ./autogen.sh && ./configure --disable-asciidoc && make && make install
     - cwd: /root/tor
-    - require:
+    - watch:
       - git: tor-src
 
 tor-torrc:
