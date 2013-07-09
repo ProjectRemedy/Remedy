@@ -2,7 +2,7 @@ ControlPort 9500
 SocksPort 9050
 DataDirectory /home/tor/datadir
 SafeLogging 1
-Log warn /home/tor/tor.log
+Log warn file /home/tor/tor.log
 PidFile /home/tor/tor.pid
 
 # We don't want to be an exit node
