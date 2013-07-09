@@ -13,6 +13,10 @@ aptitude install salt-minion
 if [ ! -e /srv ]; then
   mkdir /srv
 fi
+if [ ! -d /srv ]; then
+  echo Could not create directory /srv, aborting.
+  exit 1
+fi
 
 # copy local srv/salt to filesystem
 cp -Ri /tmp/Remedy/salt/srv/salt /srv/
@@ -29,3 +33,7 @@ salt-call -c /tmp/Remedy/salt/ state.highstate
 
 # And remove /tmp/Remedy as it should not be useful anymore
 rm -fr /tmp/Remedy
+
+echo "The local SaltStack installation and setup should be completed with success now"
+echo "Run the following command install and configure the whole dashboard:"
+echo "  salt '*' state.highstate"
