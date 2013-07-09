@@ -46,11 +46,11 @@ tor-dep-libevent:
     - name: libevent-dev
 
 tor-dep-make:
-  - pkg.installed:
+  pkg.installed:
     - name: make
 
 tor-dep-autoconf:
-  - pkg.installed:
+  pkg.installed:
     - name: autoconf
 
 
