@@ -69,7 +69,7 @@ tor-run:
     - require: 
       - cmd: tor-build
       - file: /home/tor/.torrc
-      - directory: /home/tor/datadir
+      - file: /home/tor/datadir
 
 #tor:
 #  pkg:
