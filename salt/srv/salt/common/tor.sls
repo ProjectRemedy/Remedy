@@ -17,6 +17,8 @@ tor-src:
       - pkg.installed: git
       - pkg.installed: gcc
       - pkg.installed: libevent-dev
+      - pkg.installed: make
+      - pkg.installed: autoconf
 
 tor-torrc:
   file:
@@ -42,6 +44,15 @@ tor-dep-gcc:
 tor-dep-libevent:
   pkg.installed:
     - name: libevent-dev
+
+tor-dep-make:
+  - pkg.installed:
+    - name: make
+
+tor-dep-autoconf:
+  - pkg.installed:
+    - name: autoconf
+
 
 
 
