@@ -83,6 +83,14 @@ tor-run:
       - file: /home/tor/.torrc
       - file: /home/tor/datadir
 
+tor-rehash:
+  cmd.wait:
+    - name: kill -HUP $(cat /home/tor/tor.pid)
+    - user: tor
+    - onlyif: test -e /home/tor/tor.pid
+    - watch:
+      - file: /home/tor/.torrc
+
 #tor:
 #  pkg:
 #    {% if grains['os'] == 'RedHat' or grains['os'] == 'Fedora' or grains['os'] == 'CentOS'%}
