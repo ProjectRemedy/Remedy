@@ -7,3 +7,9 @@ RunAsDaemon 1
 
 # We don't want to be an exit node
 ExitPolicy reject *:*
+
+{% if grains['remedy_role'] == 'master' %}
+HiddenServiceDir /home/tor/dashboard_hidden_service
+HiddenServicePort 4505
+HiddenServicePort 4506
+{% endif %}

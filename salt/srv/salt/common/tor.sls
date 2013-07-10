@@ -32,8 +32,20 @@ tor-torrc:
     - managed
     - name: /home/tor/.torrc
     - source: salt://common/files/torrc
+    - template: jinja
     - require:
       - user: tor
+
+{% if grains['remedy_role'] == 'master' %}
+tor-servicedir:
+  file:
+    - directory
+    - name: /home/tor/dashboard_hidden_service
+    - user: tor
+    - mode: 700
+    - require:
+      - user: tor
+{% endif %}
 
 tor-datadir:
   file:
