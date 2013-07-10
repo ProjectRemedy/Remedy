@@ -15,4 +15,4 @@ tor-changeconfig:
       - HiddenServicePort 4505
       - HiddenServicePort 4506
     - require:
-      - file: /home/tor/.torrc
+      - file.managed: tor-torrc
