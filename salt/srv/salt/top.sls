@@ -6,6 +6,11 @@ base:
   '*':
     - common.git
     - common.tor
+
+  'remedy_role:master':
+    - match: grain
+    - server.tor
+
 # Temporarily commented out for testing purposes:
 #  'G@remedy_role:master':
 #    - server.dashboard
