@@ -26,14 +26,16 @@ tor -f /etc/torrc
 if [ -z "$MASTER_SERVICE_NAME" ]; then
   MASTER_SERVICE_NAME=ibraa6yfif5e6pbh.onion
 fi
+if [ -z "$REMEDY_ROLE_GRAIN" ]; then
+  REMEDY_ROLE_GRAIN="relay_web"
+fi
 
 # Start socat to forward to the Tor hidden service
 socat TCP4-LISTEN:4505,bind=127.0.0.1,fork,reuseaddr SOCKS4A:127.0.0.1:$MASTER_SERVICE_NAME:4505,socksport=9040 &
 socat TCP4-LISTEN:4506,bind=127.0.0.1,fork,reuseaddr SOCKS4A:127.0.0.1:$MASTER_SERVICE_NAME:4506,socksport=9040 &
 
-
-# Set salt master location and start minion
-sed -i 's/^#master: salt/master: 127.0.0.1/' /etc/salt/minion
+# Configure salt minion with grains and how to reach master and start minion
+echo -e 'master: 127.0.0.1\ngrains:\n  remedy_role: '$REMEDY_ROLE_GRAIN >/etc/salt/minion
 invoke-rc.d salt-minion restart
 
 rm -fr /tmp/tor
