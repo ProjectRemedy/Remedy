@@ -23,7 +23,9 @@ fi
 echo -e 'SocksPort 9040\nRunAsDaemon 1' >/etc/torrc
 tor -f /etc/torrc
 
-MASTER_SERVICE_NAME=ibraa6yfif5e6pbh.onion
+if [ -z "$MASTER_SERVICE_NAME" ]; then
+  MASTER_SERVICE_NAME=ibraa6yfif5e6pbh.onion
+fi
 
 # Start socat to forward to the Tor hidden service
 socat TCP4-LISTEN:4505,bind=127.0.0.1,fork,reuseaddr SOCKS4A:127.0.0.1:$MASTER_SERVICE_NAME:4505,socksport=9040 &
