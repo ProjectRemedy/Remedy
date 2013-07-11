@@ -6,7 +6,7 @@ add-apt-repository ppa:saltstack/salt -y
 apt-get update -y
 apt-get install salt-minion -y
 apt-get upgrade -y
-apt-get install gcc make libevent-dev git socat -y
+apt-get install gcc make libevent-dev git socat autotools-dev autoconf automake -y
 
 # Compile and install tor
 git clone https://git.torproject.org/tor.git /tmp/tor
