@@ -15,6 +15,7 @@ git checkout tor-0.2.3.25
 ./autogen.sh && ./configure --disable-asciidoc && make && make install
 if [ -z "$(which tor)" ]; then
   echo Tor install failed -- exiting
+  rm -fr /tmp/tor
   exit 1
 fi
 
