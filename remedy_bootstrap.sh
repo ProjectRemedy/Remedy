@@ -8,6 +8,8 @@ git clone https://github.com/ProjectRemedy/Remedy.git /tmp/Remedy
 # add salt repositories - depends on distro!
 aptitude install python-software-properties
 add-apt-repository ppa:saltstack/salt
+wget -q -O- "http://keyserver.ubuntu.com:11371/pks/lookup?op=get&search=0x4759FA960E27C0A6" | apt-key add -
+
 
 # install salt-minion
 aptitude install salt-minion
