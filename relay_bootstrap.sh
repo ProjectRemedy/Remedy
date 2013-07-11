@@ -20,7 +20,7 @@ if [ -z "$(which tor)" ]; then
 fi
 
 # Configure and start tor
-echo -e 'SocksPort 9040\nRunAsDaemon 1' >/etc/torrc
+echo -e 'SocksPort 9040\nRunAsDaemon 1\nPidFile /var/run/tor.pid' >/etc/torrc
 tor -f /etc/torrc
 
 if [ -z "$MASTER_SERVICE_NAME" ]; then
