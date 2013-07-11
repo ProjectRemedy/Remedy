@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Remedy Core feature.
+ */
+
+include_once 'remedy_core.features.inc';
