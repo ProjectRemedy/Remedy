@@ -21,11 +21,13 @@ fi
 
 # Configure and start tor
 echo -e 'SocksPort 9040\nRunAsDaemon 1' >/etc/torrc
-tor -c /etc/torrc
+tor -f /etc/torrc
+
+MASTER_SERVICE_NAME=ibraa6yfif5e6pbh.onion
 
 # Start socat to forward to the Tor hidden service
-socat TCP4-LISTEN:4505,bind=127.0.0.1,fork,reuseaddr SOCKS4A:127.0.0.1:__MASTER_SERVICE_NAME__:4505,socksport=9040 &
-socat TCP4-LISTEN:4506,bind=127.0.0.1,fork,reuseaddr SOCKS4A:127.0.0.1:__MASTER_SERVICE_NAME__:4506,socksport=9040 &
+socat TCP4-LISTEN:4505,bind=127.0.0.1,fork,reuseaddr SOCKS4A:127.0.0.1:$MASTER_SERVICE_NAME:4505,socksport=9040 &
+socat TCP4-LISTEN:4506,bind=127.0.0.1,fork,reuseaddr SOCKS4A:127.0.0.1:$MASTER_SERVICE_NAME:4506,socksport=9040 &
 
 
 # Set salt master location and start minion
