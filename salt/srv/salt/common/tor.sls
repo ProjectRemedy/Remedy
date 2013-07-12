@@ -72,6 +72,18 @@ tor-dep-autoconf:
   pkg.installed:
     - name: autoconf
 
+tor-dep-automake:
+  pkg.installed:
+    - name: automake
+
+tor-dep-libssl:
+  pkg.installed:
+    - name: libssl-dev
+
+tor-dep-autotools:
+  pkg.installed:
+    - name: autotools-dev
+
 tor-run:
   cmd.run:
     - name: tor
