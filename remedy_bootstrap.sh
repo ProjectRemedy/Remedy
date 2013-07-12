@@ -15,7 +15,7 @@ wget -q -O- "http://keyserver.ubuntu.com:11371/pks/lookup?op=get&search=0x4759FA
 apt-get update 
 
 # install salt-minion
-aptitude install salt-minion
+aptitude install salt-minion -y
 
 # Create a local /srv directory if it does not exist
 if [ ! -e /srv ]; then
