@@ -2,16 +2,17 @@
 # /!\ alpha status
 # This script probably only works for Ubuntu
 
-apt-get install git
+apt-get install git -y
 
 # clone remedy github repo
 git clone https://github.com/ProjectRemedy/Remedy.git /tmp/Remedy
 
 # add salt repositories - depends on distro!
 aptitude install python-software-properties
-add-apt-repository ppa:saltstack/salt
+add-apt-repository ppa:saltstack/salt -y
 wget -q -O- "http://keyserver.ubuntu.com:11371/pks/lookup?op=get&search=0x4759FA960E27C0A6" | apt-key add -
 
+apt-get update 
 
 # install salt-minion
 aptitude install salt-minion
