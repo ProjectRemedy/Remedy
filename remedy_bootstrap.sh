@@ -2,6 +2,8 @@
 # /!\ alpha status
 # This script probably only works for Ubuntu
 
+apt-get install git
+
 # clone remedy github repo
 git clone https://github.com/ProjectRemedy/Remedy.git /tmp/Remedy
 
