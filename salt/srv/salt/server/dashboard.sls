@@ -95,7 +95,7 @@ apache2-restart:
     
 pear-drush:
   cmd.run:
-    - name: pear channel-discover pear.drush.org & pear install drush/drush
+    - name: pear channel-discover pear.drush.org && pear install drush/drush
 
 mariadb-server-5.5:
   cmd.run:
