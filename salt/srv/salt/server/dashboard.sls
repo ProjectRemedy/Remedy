@@ -35,7 +35,7 @@ apache2:
     - installed
 
 #RRDtool + php_rrdtool
-http://oss.oetiker.ch/rrdtool/pub/rrdtool-1.4.8.tar.gz:
+rrdtool-1.4.8.tar.gz:
   file:
     - managed
     - name: /home/ubuntu/rrdtool-1.4.8.tar.gz
