@@ -17,7 +17,6 @@ socat:
   pkg:
     - installed  
 
-
 php5-pkgs:
   pkg.installed:
     - names:
@@ -70,7 +69,10 @@ php_rrdtool:
     - require:
       - file: php_rrdtool.tar.gz
       - pkg.installed: apache2
-      
+
+# Do we need this? sudo apt-get install rrdtool librrd-dev php5-dev gcc binutils
+
+
 php_rrdtool-install:       
   cmd.run:
     - name: phpize && ./configure --with-php-config=/usr/bin/php-config --with-rrdtool=/usr/ && make && make install
