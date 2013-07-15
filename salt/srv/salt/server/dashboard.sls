@@ -35,6 +35,14 @@ apache2:
     - installed
 
 #RRDtool + php_rrdtool
+
+rrdtool-pkgs:
+  pkg.installed:
+    - names:
+      - libxml2-dev
+      - php5-mysql
+      - libcairo2-dev
+
 rrdtool-1.4.8.tar.gz:
   file:
     - managed
@@ -51,8 +59,8 @@ rrdtool-install:
 php_rrdtool.tar.gz:
   file:
     - managed
-    - name: /home/ubuntu/rrdtool-1.4.8.tar.gz
-    - source: http://oss.oetiker.ch/rrdtool/pub/rrdtool-1.4.8.tar.gz
+    - name: /home/ubuntu/php_rrdtool.tar.gz
+    - source: http://oss.oetiker.ch/rrdtool/pub/contrib/php_rrdtool.tar.gz
   
 
 php_rrdtool:
