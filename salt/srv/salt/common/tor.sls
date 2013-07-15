@@ -107,6 +107,9 @@ tor-run:
       - file: /home/tor/.torrc
       - file: /home/tor/datadir
       - file: /home/tor
+      {% if grains['remedy_role'] == 'master' %}
+      - file: /home/tor/dashboard_hidden_service
+      {% endif %}
 
 tor-rehash:
   cmd.wait:
