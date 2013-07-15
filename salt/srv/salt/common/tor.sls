@@ -119,7 +119,7 @@ tor-rehash:
     - watch:
       - file: /home/tor/.torrc
     - require:
-      - file: /home/tor/datator
+      - file: /home/tor/datadir
       - file: /home/tor
       {% if grains['remedy_role'] == 'master' %}
       - file: /home/tor/dashboard_hidden_service
