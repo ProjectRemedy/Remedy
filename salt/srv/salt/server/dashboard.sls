@@ -73,7 +73,7 @@ php_rrdtool:
       
 php_rrdtool-install:       
   cmd.run:
-    - name: phpize && make && make install
+    - name: phpize && ./configure --with-php-config=/usr/bin/php-config --with-rrdtool=/usr/ && make && make install
     - cwd: /usr/include/php5/rrdtool/
     - require:
       - cmd: php_rrdtool
@@ -82,11 +82,13 @@ rrdtool.ini:
   file:
     - managed
     - name: /etc/php5/apache2/conf.d/rrdtool.ini
-    - source: salt://
+    - source: salt://server/rrdtool/files/rrdtool.ini
   
-/*
-service apache2 restart
-*/    
+apache2-restart:
+  cmd.run: 
+    - name: service apache2 restart
+    - require: 
+      - file: rrdtool.ini
 
     
 pear-drush:
