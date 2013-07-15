@@ -1,6 +1,5 @@
 # First draft for dashboard sls (not fully tested yet)
 # based on https://github.com/saltstack/salt-states/blob/master/small/lamp-drupal/init.sls#L3
-{% if grains['os'] == 'Ubuntu' %}
 
 #oonib
 
