@@ -44,5 +44,5 @@ salt-call -c /tmp/Remedy/salt/ state.highstate
 rm -fr /tmp/Remedy
 
 echo "The local SaltStack installation and setup should be completed with success now"
-echo "Run the following command install and configure the whole dashboard:"
+echo "Run the following command to install and configure the whole dashboard:"
 echo "  salt '*' state.highstate"
