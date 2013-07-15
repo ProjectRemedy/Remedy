@@ -118,3 +118,10 @@ tor-rehash:
     - onlyif: test -e /home/tor/tor.pid
     - watch:
       - file: /home/tor/.torrc
+    - require:
+      - file: /home/tor/datator
+      - file: /home/tor
+      {% if grains['remedy_role'] == 'master' %}
+      - file: /home/tor/dashboard_hidden_service
+      {% endif %}
+
