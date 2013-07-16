@@ -1,0 +1,5 @@
+name = Remedy DNSimple wrapper
+package = Remedy
+version = VERSION
+core = 7.x
+files[] = remedy_dnsimple.module
