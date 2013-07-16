@@ -1,0 +1,117 @@
+<?php
+/**
+ * @file
+ *
+ * Bundle Inherit Node module.
+ */
+
+/**
+ *
+ * Implements hook_form_alter().
+ */
+function bundle_inherit_node_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'node_type_form') {
+    // Only load entity info if we're on a node_type_form.
+    $entity = entity_get_info('node');
+    if (count($entity['bundles']) > 0) {
+      // Attach inheritance form
+      if (empty($form['#node_type']->type)) {
+         bundle_inherit_attach_inherit_form($form, $form_state, 'node');
+      }
+      // If editing existing node type we should provide it
+      else {
+         bundle_inherit_attach_inherit_form($form, $form_state, 'node', $form['#node_type']->type);
+      }
+      if (!empty($form['bundle_inherit'])) {
+        $form['bundle_inherit']['#group'] = 'additional_settings';
+        // We should add submit callback only if we are creating new content type
+        if (empty($form['#node_type']->type)) {
+          $form['#submit'][] = 'bundle_inherit_node_form_submit';
+        }
+      }
+    }
+  }
+}
+
+/**
+ *
+ * Additional submit handler to the 'node_type_form' form. Perform inherit
+ * operations.
+ */
+function bundle_inherit_node_form_submit(&$form, &$form_state) {
+  // Check if body field instance already exists.
+  if (isset($form_state['values']['bundle_inherit']['inherit']) && $form_state['values']['bundle_inherit']['inherit']) {
+    if ($instance = field_info_instance('node', 'body', trim($form_state['values']['type']))) {
+      field_delete_instance($instance);
+    }
+    bundle_inherit_attach_inherit_form_submit(trim($form_state['values']['type']), $form, $form_state);
+    drupal_set_message(t('Node type %type has inherited from %parent_type. All fields from %parent_type type were attached to %type type.',
+                        array('%type' => $form_state['values']['name'], '%parent_type' => $form['bundle_inherit']['parent_type']['#options'][$form_state['values']['bundle_inherit']['parent_type']])));
+  }
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function bundle_inherit_node_menu_alter(&$items) {
+  $items['admin/structure/types']['page callback'] = 'bundle_inherit_node_overview_types';
+}
+
+/**
+ * Redeclare content types admin page. Sort and add indention to the inherited types.
+ */
+function bundle_inherit_node_overview_types() {
+  $types = node_type_get_types();
+  $field_ui = module_exists('field_ui');
+  $header = array(t('Name'), array('data' => t('Operations'), 'colspan' => $field_ui ? '4' : '2'));
+  $rows = array();
+
+  $tree = bundle_inherit_get_tree('node');
+  dsm($tree);	
+  // Firstly we need to iterate through node types wich has children types
+  foreach ($tree as $bundle_type => $bundle) {
+    $type = $types[$bundle_type];
+    if (node_hook($type->type, 'form')) {
+      $type_url_str = str_replace('_', '-', $type->type);
+      $row = array(str_repeat('- - ', $bundle['depth']) . theme('node_admin_overview', array('name' => $bundle['label'], 'type' => $type)));
+      // Set the edit column.
+      $row[] = array('data' => l(t('edit'), 'admin/structure/types/manage/' . $type_url_str));
+
+      if ($field_ui) {
+        // Manage fields.
+        $row[] = array('data' => l(t('manage fields'), 'admin/structure/types/manage/' . $type_url_str . '/fields'));
+
+        // Display fields.
+        $row[] = array('data' => l(t('manage display'), 'admin/structure/types/manage/' . $type_url_str . '/display'));
+      }
+
+      // Set the delete column.
+      if ($type->custom) {
+        $row[] = array('data' => l(t('delete'), 'admin/structure/types/manage/' . $type_url_str . '/delete'));
+      }
+      else {
+        $row[] = array('data' => '');
+      }
+
+      $rows[$type->type] = $row;
+    }
+  }
+
+  $build['node_table'] = array(
+    '#theme' => 'table',
+    '#header' => $header,
+    '#rows' => $rows,
+    '#empty' => t('No content types available. <a href="@link">Add content type</a>.', array('@link' => url('admin/structure/types/add'))),
+  );
+
+  return $build;
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function bundle_inherit_node_views_api() {
+  return array(
+    'api' => 3,
+  );
+}

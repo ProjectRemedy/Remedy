@@ -1,0 +1,72 @@
+From 795bfe611901fa7de4e0350b062799b947bceeb6 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?S=C3=A9bastien=20Lavoie?= <github@lavoie.sl>
+Date: Wed, 19 Dec 2012 00:58:07 -0500
+Subject: [PATCH 1/2] added newlines at end of files for better support for
+ patches
+
+---
+ CHANGELOG.txt                                | 2 +-
+ README.txt                                   | 2 +-
+ bundle_inherit.info                          | 2 +-
+ bundle_inherit.install                       | 2 +-
+ bundle_inherit_node/bundle_inherit_node.info | 2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/CHANGELOG.txt b/CHANGELOG.txt
+index 717658d..4833597 100644
+--- a/CHANGELOG.txt
++++ b/CHANGELOG.txt
+@@ -7,4 +7,4 @@ bundle_inherit 7.x-1.x
+ bundle_inherit 7.x-1.0-alpha2
+   Issue #1331948 by joachim: Fixed node content types page altering. Use hook_menu_alter instead of altering through hook_page_build.
+   Issue #1331954 by joachim: Added inheritance status message (with link to the parent bundle fields manage page) in the edit form of existing bundles. Fourth optional argument added to the bundle_inherit_attach_inherit_form() function.
+-  Issue #1331940 by joachim: README.txt from ./bundle_inherit_node removed. README.txt from the root dir updated.
+\ No newline at end of file
++  Issue #1331940 by joachim: README.txt from ./bundle_inherit_node removed. README.txt from the root dir updated.
+diff --git a/README.txt b/README.txt
+index 0154eb6..6937b70 100644
+--- a/README.txt
++++ b/README.txt
+@@ -32,4 +32,4 @@ To submit bug reports and feature suggestions, or to track changes:
+ -- MAINTAINERS --
+ 
+ lemark - http://drupal.org/user/317870
+-alexweber - http://drupal.org/user/850856
+\ No newline at end of file
++alexweber - http://drupal.org/user/850856
+diff --git a/bundle_inherit.info b/bundle_inherit.info
+index 99c05cb..4a01ba0 100644
+--- a/bundle_inherit.info
++++ b/bundle_inherit.info
+@@ -1,4 +1,4 @@
+ name = Bundle Inheritance
+ description = Provide API for modules to implement bundle inheritance logic
+ core = 7.x
+-files[] = bundle_inherit.test
+\ No newline at end of file
++files[] = bundle_inherit.test
+diff --git a/bundle_inherit.install b/bundle_inherit.install
+index 2d6f326..8a096a4 100644
+--- a/bundle_inherit.install
++++ b/bundle_inherit.install
+@@ -127,4 +127,4 @@ function bundle_inherit_update_7000() {
+   }
+ 
+   return t('Renamed bundle_hierarchy table to bundle_inherit.');
+-}
+\ No newline at end of file
++}
+diff --git a/bundle_inherit_node/bundle_inherit_node.info b/bundle_inherit_node/bundle_inherit_node.info
+index d0caac4..4f4a5b6 100644
+--- a/bundle_inherit_node/bundle_inherit_node.info
++++ b/bundle_inherit_node/bundle_inherit_node.info
+@@ -2,4 +2,4 @@ name = Bundle Inheritance Node
+ description = Allow to inherit one node type from other
+ dependencies[] = bundle_inherit
+ files[] = bundle_inherit_node.test
+-core = 7.x
+\ No newline at end of file
++core = 7.x
+-- 
+1.8.0.1
+
