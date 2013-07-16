@@ -1,6 +1,5 @@
 # First draft for dashboard sls (not fully tested yet)
 # based on https://github.com/saltstack/salt-states/blob/master/small/lamp-drupal/init.sls#L3
-{% if grains['os'] == 'Ubuntu' %}
 
 #oonib
 
@@ -17,7 +16,8 @@ conllectd-cfg:
 socat:
   pkg:
     - installed  
-
+    
+tor-collectd:
 
 php5-pkgs:
   pkg.installed:
@@ -32,11 +32,19 @@ php5-pkgs:
       - php5-gd
 
 apache2:
-  pkg:
-    - installed
+  pkg.installed:
+    - names:
+      - apache2
+      - libapache2-mod-php5
 
-#RRDtool + php_rrdtool
-http://oss.oetiker.ch/rrdtool/pub/rrdtool-1.4.8.tar.gz:
+rrdtool-pkgs:
+  pkg.installed:
+    - names:
+      - libxml2-dev
+      - pango
+      - libcairo2-dev
+
+rrdtool-1.4.8.tar.gz:
   file:
     - managed
     - name: /home/ubuntu/rrdtool-1.4.8.tar.gz
@@ -52,8 +60,8 @@ rrdtool-install:
 php_rrdtool.tar.gz:
   file:
     - managed
-    - name: /home/ubuntu/rrdtool-1.4.8.tar.gz
-    - source: http://oss.oetiker.ch/rrdtool/pub/rrdtool-1.4.8.tar.gz
+    - name: /home/ubuntu/php_rrdtool.tar.gz
+    - source: http://oss.oetiker.ch/rrdtool/pub/contrib/php_rrdtool.tar.gz
   
 
 php_rrdtool:
@@ -63,10 +71,13 @@ php_rrdtool:
     - require:
       - file: php_rrdtool.tar.gz
       - pkg.installed: apache2
-      
+
+# Do we need this? sudo apt-get install rrdtool librrd-dev php5-dev gcc binutils
+
+
 php_rrdtool-install:       
   cmd.run:
-    - name: phpize && make && make install
+    - name: phpize && ./configure --with-php-config=/usr/bin/php-config --with-rrdtool=/usr/ && make && make install
     - cwd: /usr/include/php5/rrdtool/
     - require:
       - cmd: php_rrdtool
@@ -75,16 +86,11 @@ rrdtool.ini:
   file:
     - managed
     - name: /etc/php5/apache2/conf.d/rrdtool.ini
-    - source: salt://
+    - source: salt://server/rrdtool/files/rrdtool.ini
   
-/*
-service apache2 restart
-*/    
-
-    
 pear-drush:
   cmd.run:
-    - name: pear channel-discover pear.drush.org & pear install drush/drush
+    - name: pear channel-discover pear.drush.org && pear install drush/drush
 
 mariadb-server-5.5:
   cmd.run:
@@ -102,8 +108,35 @@ mariadb-server-5.5:
     - refresh: True
     - require:
       - cmd: mariadb-server-5.5
+
+
+/etc/apache2/sites-available/dashboard.conf:
+  file.managed:
+    - source: salt://server/apache2/files/dashboard.conf
+    - user: root
+    - group: root
+    - mode: 644
+    - watch_in:
+      - service: apache
       
+a2enmod rewrite:
+  cmd.run:
+    - onlyif: test -e /etc/apache2/mods-enabled/rewrite.load
+    - watch_in:
+      - service: apache      
+
+drupal_install: 
+  cmd.run: 
+    - name: drush dl drupal && mv drupal-7.22 dashboard
+
+apache2-restart:
+  cmd.run: 
+    - name: service apache2 restart
+    - require: 
+      - file: rrdtool.ini
       
+#install rules & patch it
+#install bundle_inherit & patch it
 
 remedy_drush: 
   cmd.run:

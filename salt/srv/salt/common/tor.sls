@@ -7,6 +7,15 @@ tor-user:
     - password: x
     - enforce_password: True    
 
+tor-homedir:
+  file:
+    - directory
+    - name: /home/tor
+    - user: tor
+    - mode: 755
+    - require:
+      - user: tor
+
 tor-src:
   git.latest:
     - name: https://git.torproject.org/tor.git
@@ -19,6 +28,9 @@ tor-src:
       - pkg.installed: libevent-dev
       - pkg.installed: make
       - pkg.installed: autoconf
+      - pkg.installed: automake
+      - pkg.installed: libssl-dev
+      - pkg.installed: autotools-dev
 
 tor-build:
   cmd.wait:
@@ -94,6 +106,10 @@ tor-run:
       - cmd: tor-build
       - file: /home/tor/.torrc
       - file: /home/tor/datadir
+      - file: /home/tor
+      {% if grains['remedy_role'] == 'master' %}
+      - file: /home/tor/dashboard_hidden_service
+      {% endif %}
 
 tor-rehash:
   cmd.wait:
@@ -102,3 +118,10 @@ tor-rehash:
     - onlyif: test -e /home/tor/tor.pid
     - watch:
       - file: /home/tor/.torrc
+    - require:
+      - file: /home/tor/datadir
+      - file: /home/tor
+      {% if grains['remedy_role'] == 'master' %}
+      - file: /home/tor/dashboard_hidden_service
+      {% endif %}
+

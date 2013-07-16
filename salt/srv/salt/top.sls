@@ -7,9 +7,11 @@ base:
     - common.git
     - common.tor
 
-# Temporarily commented out for testing purposes:
-#  'G@remedy_role:master':
+#  'remedy_role:master':
+#    - match: grain
 #    - server.dashboard
-#
-#  'G@remedy_role:probe':
+
+# Commented out for now ..
+#  'remedy_role:probe':
+#    - match: grain
 #    - probe.ooni-probe
