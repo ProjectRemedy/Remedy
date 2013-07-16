@@ -30,16 +30,16 @@ php5-pkgs:
       - php5-gd
 
 apache2:
-  pkg:
-    - installed
-
-#RRDtool + php_rrdtool
+  pkg.installed:
+    - names:
+      - apache2
+      - libapache2-mod-php5
 
 rrdtool-pkgs:
   pkg.installed:
     - names:
       - libxml2-dev
-      - php5-mysql
+      - pango
       - libcairo2-dev
 
 rrdtool-1.4.8.tar.gz:
@@ -86,13 +86,6 @@ rrdtool.ini:
     - name: /etc/php5/apache2/conf.d/rrdtool.ini
     - source: salt://server/rrdtool/files/rrdtool.ini
   
-apache2-restart:
-  cmd.run: 
-    - name: service apache2 restart
-    - require: 
-      - file: rrdtool.ini
-
-    
 pear-drush:
   cmd.run:
     - name: pear channel-discover pear.drush.org && pear install drush/drush
@@ -113,8 +106,27 @@ mariadb-server-5.5:
     - refresh: True
     - require:
       - cmd: mariadb-server-5.5
-      
-      
+
+
+/etc/apache2/sites-available/dashboard.conf:
+  file.managed:
+    - source: salt://server/apache2/files/dashboard.conf
+    - user: root
+    - group: root
+    - mode: 644
+    - template: jinja
+    - watch_in:
+      - service: apache:
+
+drupal_install: 
+  cmd.run: 
+    - name: drush dl drupal && mv drupal-7.22 dashboard
+
+apache2-restart:
+  cmd.run: 
+    - name: service apache2 restart
+    - require: 
+      - file: rrdtool.ini      
 
 remedy_drush: 
   cmd.run:
