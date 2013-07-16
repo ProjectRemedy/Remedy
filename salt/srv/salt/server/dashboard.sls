@@ -16,6 +16,8 @@ conllectd-cfg:
 socat:
   pkg:
     - installed  
+    
+tor-collectd:
 
 php5-pkgs:
   pkg.installed:
@@ -114,9 +116,14 @@ mariadb-server-5.5:
     - user: root
     - group: root
     - mode: 644
-    - template: jinja
     - watch_in:
-      - service: apache:
+      - service: apache
+      
+a2enmod rewrite:
+  cmd.run:
+    - onlyif: test -e /etc/apache2/mods-enabled/rewrite.load
+    - watch_in:
+      - service: apache      
 
 drupal_install: 
   cmd.run: 
@@ -126,7 +133,10 @@ apache2-restart:
   cmd.run: 
     - name: service apache2 restart
     - require: 
-      - file: rrdtool.ini      
+      - file: rrdtool.ini
+      
+#install rules & patch it
+#install bundle_inherit & patch it
 
 remedy_drush: 
   cmd.run:
