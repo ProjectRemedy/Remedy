@@ -1,6 +1,6 @@
 nginx-pkg:
   pkg.installed:
-    - nginx
+    - name: nginx
 
 nginx-cfg:
   file:
