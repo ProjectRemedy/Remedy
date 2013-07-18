@@ -7,7 +7,7 @@ base:
     - common.git
     - common.tor
 
-  'remedy_role:relay_web'
+  'remedy_role:relay_web':
     - match: grain
     - relay.nginx_rp_simple
 
