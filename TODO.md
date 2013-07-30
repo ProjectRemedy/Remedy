@@ -1,2 +1,3 @@
 - all README files in the srv/ directory should be deleted/moved somewhere else: srv/ is meant to be copied as-is to the master's filesystem, and should as such not be polluted by non-functional content
 - secure execution of Tor, in case another binary exists in another directory.
+- rewrite the main README with proper markdown syntax...
