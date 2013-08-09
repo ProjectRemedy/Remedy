@@ -1,4 +1,4 @@
-# Bootstrap script for Remedy.
+# Bootstrap script for a Remedy Master.
 # /!\ alpha status
 # This script probably only works for Ubuntu
 
