@@ -4,5 +4,5 @@ file_roots:
   base:
     - /srv/salt/
 
-state_top: bootstrap.sls
+state_top: dashboard-bootstrap-top.sls
 
