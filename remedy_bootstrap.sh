@@ -32,7 +32,7 @@ cp -Ri /tmp/Remedy/salt/srv/salt /srv/
 
 # At this time the one-time minion config file is in Remedy/salt/
 # Run masterless command to continue bootstrap:
-salt-call -c /tmp/Remedy/salt/ state.highstate
+salt-call -c /tmp/Remedy/salt/bootstrap/master state.highstate
 #  - this will do minimalist operation to have salt master and minion
 #    configured and running
 
