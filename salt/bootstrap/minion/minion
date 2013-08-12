@@ -1,3 +1,5 @@
+root_dir: /tmp/Remedy/salt/bootstrap/minion
+
 file_client: local
 
 file_roots:
