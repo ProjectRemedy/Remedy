@@ -1,0 +1,16 @@
+# minion config file for _all_ minions of the Remedy architecture
+# The bootstrap script appends the right grains to it,
+# through its masterless call.
+
+# localhost is the master since it's the socat listening
+master: 127.0.0.1
+
+# The rest is appended at bootstrap time:
+# - id
+# - remedy role grain
+# - grain containing master's tor hidden service (?)
+
+id: $grains['id']
+
+grains:
+  remedy_role: $grains['remedy_role']
