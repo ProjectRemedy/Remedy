@@ -1,4 +1,4 @@
-root_dir: /tmp/Remedy/salt/bootstrap/minion
+root_dir: /tmp/remedy-bootstrap
 
 file_client: local
 
