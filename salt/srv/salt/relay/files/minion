@@ -14,3 +14,4 @@ id: {{ grains['id'] }}
 
 grains:
   remedy_role: {{ grains['remedy_role'] }}
+  master_hidden_service: {{ grains['master_hidden_service'] }}
