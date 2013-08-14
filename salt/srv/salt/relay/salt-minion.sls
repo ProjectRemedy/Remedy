@@ -9,4 +9,4 @@ salt-minion-cfg:
     - name: /etc/salt/minion
     - template: jinja
     - require:
-     - pkg.installed: salt-minion
+      - pkg.installed: salt-minion
