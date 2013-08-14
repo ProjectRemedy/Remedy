@@ -10,7 +10,7 @@ master: 127.0.0.1
 # - remedy role grain
 # - grain containing master's tor hidden service (?)
 
-id: $grains['id']
+id: grains['id']
 
 grains:
-  remedy_role: $grains['remedy_role']
+  remedy_role: grains['remedy_role']
