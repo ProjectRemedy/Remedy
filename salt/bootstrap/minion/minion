@@ -4,7 +4,7 @@ file_client: local
 
 file_roots:
   base:
-    - /tmp/remedy-bootstrap/srv
+    - /tmp/remedy-bootstrap/srv/salt
 
 state_top: relay-bootstrap-top.sls
 
