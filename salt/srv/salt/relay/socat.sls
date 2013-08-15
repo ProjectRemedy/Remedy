@@ -31,10 +31,9 @@ socat-salt-4506:
     - require:
       - file: /etc/init.d/socat
 
-socat-service-run:
+socat-service-enable:
   service:
-    - running
-    - enable: True
+    - enabled
     - name: socat
     - require:
       - file: /etc/init.d/socat
