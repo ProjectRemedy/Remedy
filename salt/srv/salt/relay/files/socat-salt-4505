@@ -1,0 +1,9 @@
+# Socat config for connection to Remedy Salt master through Tor - port 4505 TCP
+
+ENABLE=yes
+PIDFILE=/var/run/socat-salt-4505.pid
+LEFT=TCP4-LISTEN:4505,bind=127.0.0.1,fork,reuseaddr
+RIGHT=SOCKS4A:127.0.0.1:{{ grains['master_hidden_service'] }}:4505,socksport=9050
+
+USER=root
+GROUP=root
