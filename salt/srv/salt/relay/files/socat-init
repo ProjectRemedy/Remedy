@@ -1,0 +1,99 @@
+#!/bin/bash
+
+### BEGIN INIT INFO
+# Provides:		socat
+# Required-Start:	$local_fs
+# Required-Stop:	$local_fs
+# Should-Start:
+# Should-Stop:
+# Default-Start:	2 3 4 5
+# Default-Stop:		0 1 6
+# Short-Description:	Provide a startup script for socat
+# Description:		a Socat startup script
+#			Uses files in /etc/socat/ to decide what commands to start
+#			You need to set the following variables in files in /etc/socat/:
+#			PIDFILE: where to put the PID
+#			LEFT: left part of command line
+#			RIGHT: right part of command line
+#			USER: user to run this instance of socat as
+#			GROUP: same, but for group
+#			ENABLE={yes|no}: if set to "yes", process will be considered for start and stop operations
+#			KheOps <kheops@ceops.eu>
+### END INIT INFO
+
+SOCAT=/usr/bin/socat
+CONFIGDIR=/etc/socat
+
+# NOTE: these may be Debian & Ubuntu specific
+# They notably provide fancy display of service start/stop messages
+. /lib/init/vars.sh
+. /lib/lsb/init-functions
+
+do_start ()
+{
+  config=$1
+  . $config
+  if [ "$ENABLE" = "yes" ]; then
+    log_daemon_msg "Starting socat service" "$(basename $config)" || true
+    if [ -e "$PIDFILE" ]; then
+      log_end_msg 1
+      return 1
+    fi
+    $SOCAT $LEFT,setuid=$USER,setgid=$GROUP $RIGHT &
+    PID=$!
+    sleep 1
+    kill -0 $PID && echo $PID >"$PIDFILE"
+    if [ $? -ne 0 ]; then
+      /bin/kill $PID
+      log_end_msg 1
+      return 1
+    fi
+  fi
+  log_end_msg 0
+  return 0
+}
+
+do_stop ()
+{
+  config=$1
+  . $config
+  if [ "$ENABLE" = "yes" ]; then
+    log_daemon_msg "Stopping socat service" "$(basename $config)" || true
+    if [ -r "$PIDFILE" ]; then
+      /bin/kill $(/bin/cat "$PIDFILE")
+      /bin/rm "$PIDFILE"
+    else
+      log_end_msg 1
+      return 1
+    fi
+  fi
+  log_end_msg 0
+  return 0
+}
+
+RETCODE=0
+for cfg in $CONFIGDIR/*; do
+  case "$1" in
+    start)
+      do_start "$cfg"
+      if [ $? -ne 0 ]; then RETCODE=$?; fi
+      ;;
+    restart|force-reload)
+      do_stop "$cfg"
+      if [ $? -ne 0 ]; then RETCODE=$?; fi
+      sleep 1
+      do_start "$cfg"
+      if [ $? -ne 0 ]; then RETCODE=$?; fi
+      ;;
+    stop)
+      do_stop "$cfg"
+      if [ $? -ne 0 ]; then RETCODE=$?; fi
+      ;;
+    *)
+      echo "Usage: socat [start|stop|restart|force-reload]" >&2
+      exit 3
+      ;;
+  esac
+done
+
+exit $RETCODE
