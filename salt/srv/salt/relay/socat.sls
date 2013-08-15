@@ -40,13 +40,3 @@ socat-service-enable:
       - file: /etc/socat/salt-4505
       - file: /etc/socat/salt-4506
 
-socat-service-run:
-  cmd.run:
-    - name: service socat start
-    - require:
-      - file: /etc/init.d/socat
-      - file: /etc/socat/salt-4505
-      - file: /etc/socat/salt-4506
-    - unless: test -f /var/run/socat-salt-4505.pid
-    - unless: test -f /var/run/socat-salt-4506.pid
-
