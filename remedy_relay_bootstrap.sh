@@ -47,14 +47,8 @@ salt-call -c /tmp/remedy-bootstrap state.highstate
 
 rm -fr /tmp/Remedy /tmp/remedy-bootstrap
 
-# if the masterless execution of salt does its job correctly, we're theoretically done here.
+# Due to a SaltStack problem which makes it stuck on a zombie process when trying to start socat service,
+# we have to do the two final steps by hand:
 
-# following lines serve as a reminder for now (will be moved/deleted)
-# Configure and start tor
-#echo -e 'SocksPort 9040\nRunAsDaemon 1\nPidFile /var/run/tor.pid' >/etc/torrc
-#tor -f /etc/torrc
-
-# Start socat to forward to the Tor hidden service
-#socat TCP4-LISTEN:4505,bind=127.0.0.1,fork,reuseaddr SOCKS4A:127.0.0.1:$REMEDY_MASTER_SERVICE_NAME:4505,socksport=9040 &
-#socat TCP4-LISTEN:4506,bind=127.0.0.1,fork,reuseaddr SOCKS4A:127.0.0.1:$REMEDY_MASTER_SERVICE_NAME:4506,socksport=9040 &
-
+invoke-rc.d socat start
+invoke-rc.d salt-minion start
