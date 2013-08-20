@@ -99,7 +99,11 @@ tor-dep-autotools:
 tor-run:
   cmd.run:
     - name: tor -f /home/tor/.torrc
+    {% if grains['remedy_role'] == 'relay_tor' %}
+    - user: root
+    {% else %}
     - user: tor
+    {% endif %}
     - cwd: /home/tor
     - unless: test -e /home/tor/tor.pid
     - require: 
