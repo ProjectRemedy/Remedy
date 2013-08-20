@@ -98,7 +98,7 @@ tor-dep-autotools:
 
 tor-run:
   cmd.run:
-    - name: tor
+    - name: tor -f /home/tor/.torrc
     - user: tor
     - cwd: /home/tor
     - unless: test -e /home/tor/tor.pid
