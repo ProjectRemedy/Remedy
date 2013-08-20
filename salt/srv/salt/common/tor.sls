@@ -64,7 +64,11 @@ tor-datadir:
     - directory
     - name: /home/tor/datadir
     - mode: 700
+    {% if grains['remedy_role'] == 'relay_tor' %}
+    - user: root
+    {% else %}
     - user: tor
+    {% endif %}
     - require:
       - user: tor
 
