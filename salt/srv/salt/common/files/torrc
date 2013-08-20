@@ -13,3 +13,11 @@ HiddenServiceDir /home/tor/dashboard_hidden_service
 HiddenServicePort 4505
 HiddenServicePort 4506
 {% endif %}
+
+{% if grains['remedy_role'] == 'relay_tor' %}
+# Let's bind these ports
+ORPort 443
+ORPort 80
+ORPort 6697
+BridgeRelay 1
+{% endif %}
