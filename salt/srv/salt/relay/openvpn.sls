@@ -1,13 +1,24 @@
-openvpn:
+openvpn-pkg:
   pkg:
-    {% if grains['os'] == 'RedHat' or grains['os'] == 'Fedora' or grains['os'] == 'CentOS'%}
     - name: openvpn
-    {% elif grains['os'] == 'Debian' or grains['os'] == 'Ubuntu'%}
-    - name: openvpn2
-    {% elif grains['os'] == 'Gentoo' or grains['os'] == 'Arch' or grains['os'] == 'FreeBSD' %}
-    - name: openvpn
-    {% endif %}
     - installed
+
+openvpn-cfg:
+  file:
+    - managed
+    - name: /etc/openvpn/remedy_vpn.conf
+    - source: salt://relay/files/openvpn.conf
+    - user: root
+    - mode: 644
+    - require:
+      - pkg.installed: openvpn
+
+openvpn-service:
   service:
     - name: openvpn
     - running
+    - enable: True
+    - require:
+      - pkg.installed: openvpn
+    - watch:
+      - file: /etc/openvpn/remedy_vpn.conf
