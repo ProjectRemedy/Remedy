@@ -21,6 +21,7 @@ dns-server-service:
     - name: unbound
     - require:
       - pkg.installed: unbound
+      - service.running: openvpn
     - watch:
       - file: /etc/unbound/unbound.conf
 
@@ -46,5 +47,7 @@ openvpn-service:
     - enable: True
     - require:
       - pkg.installed: openvpn
+      - pkg.installed: unbound
+      - file: /etc/unbound/unbound.conf
     - watch:
       - file: /etc/openvpn/remedy_vpn.conf
