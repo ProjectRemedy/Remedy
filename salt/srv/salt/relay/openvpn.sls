@@ -1,3 +1,29 @@
+# we want unbound to have a locally resolving recursive DNS server
+dns-server-pkg:
+  pkg:
+    - name: unbound
+    - installed
+
+dns-server-cfg:
+  file:
+    - managed
+    - name: /etc/unbound/unbound.conf
+    - source: salt://relay/files/unbound.conf
+    - user: root
+    - mode: 644
+    - require:
+      - pkg.installed: unbound
+
+dns-server-service:
+  service:
+    - running
+    - enable: True
+    - name: unbound
+    - require:
+      - pkg.installed: unbound
+    - watch:
+      - file: /etc/unbound/unbound.conf
+
 openvpn-pkg:
   pkg:
     - name: openvpn
