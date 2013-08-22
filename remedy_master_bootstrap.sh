@@ -29,6 +29,7 @@ fi
 
 # copy local srv/salt to filesystem
 cp -Ri /tmp/Remedy/salt/srv/salt /srv/
+cp -Ri /tmp/Remedy/salt/srv/pillar /srv/
 
 # At this time the one-time minion config file is in Remedy/salt/
 # Run masterless command to continue bootstrap:
