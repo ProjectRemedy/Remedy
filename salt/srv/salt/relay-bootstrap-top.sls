@@ -2,6 +2,6 @@ base:
   '*':
     - common.git
     - common.tor
-    - relay.socat
-    - relay.salt-minion
+    - minion-common.socat
+    - minion-common.salt-minion
 

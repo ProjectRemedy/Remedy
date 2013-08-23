@@ -5,7 +5,7 @@ salt-minion-pkg:
 salt-minion-cfg:
   file:
     - managed
-    - source: salt://relay/files/minion
+    - source: salt://minion-common/files/minion
     - name: /etc/salt/minion
     - template: jinja
     - require:

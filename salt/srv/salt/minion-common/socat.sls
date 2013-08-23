@@ -6,7 +6,7 @@ socat-init-script:
   file:
     - managed
     - name: /etc/init.d/socat
-    - source: salt://relay/files/socat-init
+    - source: salt://minion-common/files/socat-init
     - mode: 755
     - user: root
     - group: root
@@ -17,7 +17,7 @@ socat-salt-4505:
   file:
     - managed
     - name: /etc/socat/salt-4505
-    - source: salt://relay/files/socat-salt-4505
+    - source: salt://minion-common/files/socat-salt-4505
     - template: jinja
     - require:
       - file: /etc/init.d/socat
@@ -26,7 +26,7 @@ socat-salt-4506:
   file:
     - managed
     - name: /etc/socat/salt-4506
-    - source: salt://relay/files/socat-salt-4506
+    - source: salt://minion-common/files/socat-salt-4506
     - template: jinja
     - require:
       - file: /etc/init.d/socat
