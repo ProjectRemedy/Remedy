@@ -7,6 +7,7 @@ nginx-cfg:
     - managed
     - name: /etc/nginx/nginx.conf
     - source: salt://relay/files/nginx.conf
+    - template: jinja
     - user: root
     - group: root
     - mode: 644
