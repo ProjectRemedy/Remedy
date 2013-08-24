@@ -128,6 +128,7 @@ tor-run:
       - file: /home/tor/.torrc
       - file: /home/tor/datadir
       - file: /home/tor
+      - file: /home/tor/tor.log
       {% if grains['remedy_role'] == 'master' %}
       - file: /home/tor/dashboard_hidden_service
       {% endif %}
