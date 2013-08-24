@@ -51,4 +51,4 @@ rm -fr /tmp/Remedy /tmp/remedy-bootstrap
 # we have to do the two final steps by hand:
 
 invoke-rc.d socat start
-invoke-rc.d salt-minion start
+invoke-rc.d salt-minion restart
