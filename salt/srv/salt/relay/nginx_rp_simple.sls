@@ -31,3 +31,13 @@ nginx-cachedir:
     - group: nogroup
     - require:
       - pkg.installed: nginx
+
+nginx-run:
+  service:
+    - running
+    - name: nginx
+    - enable: True
+    - watch:
+      - file: /etc/nginx/nginx.conf
+    - require:
+      - pkg.installed: nginx
