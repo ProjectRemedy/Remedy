@@ -48,6 +48,19 @@ tor-torrc:
     - require:
       - user: tor
 
+tor-logfile:
+  file:
+    - managed
+    - name: /home/tor/tor.log
+    {% if grains['remedy_role'] == 'relay_tor' %}
+    - user: root
+    {% else %}
+    - user: tor
+    {% endif %}
+    - mode: 600
+    - require:
+      - user: tor
+
 {% if grains['remedy_role'] == 'master' %}
 tor-servicedir:
   file:
