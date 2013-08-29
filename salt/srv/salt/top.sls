@@ -10,6 +10,7 @@ base:
   'remedy_role:master':
     - match: grain
     - server.collectd
+    - server.socat
 
   'remedy_role:relay_web':
     - match: grain
