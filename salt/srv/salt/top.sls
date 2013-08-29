@@ -14,6 +14,7 @@ base:
 # Those are common to all relays:
   'remedy_role:relay_.*':
     - match: grain_pcre
+    - minion-common.socat
     - relay.socat
     - relay.collectd
 
