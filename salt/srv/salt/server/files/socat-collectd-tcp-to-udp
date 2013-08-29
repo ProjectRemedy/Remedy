@@ -1,0 +1,10 @@
+# Socat config to forward connections coming from Tor via TCP to the local UDP port
+# (collectd only does UDP)
+
+ENABLE=yes
+PIDFILE=/var/run/socat-collectd.pid
+LEFT=TCP4-LISTEN:25826,bind=127.0.0.1,fork,reuseaddr
+RIGHT=UDP:127.0.0.1:25826
+
+USER=root
+GROUP=root
