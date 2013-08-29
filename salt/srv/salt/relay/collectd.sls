@@ -1,7 +1,14 @@
+rrdtool-pkg:
+  pkg:
+    - installed
+    - name: rrdtool
+
 collectd-pkg:
   pkg:
     - installed
     - name: collectd
+    - require:
+      - pkg.installed: rrdtool
 
 collectd-cfg:
   file:
