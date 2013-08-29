@@ -3,6 +3,7 @@ socat-cfg-collectd:
     - managed
     - name: /etc/socat/collectd-into-tor
     - source: salt://relay/files/socat-collectd-into-tor
+    - template: jinja
     - user: root
     - groupe: root
     - mode: 644
