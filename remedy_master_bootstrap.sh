@@ -44,8 +44,11 @@ salt-call -c /tmp/Remedy/salt/bootstrap/master state.highstate
 # And remove /tmp/Remedy as it should not be useful anymore
 rm -fr /tmp/Remedy
 
-# Run highstate
-salt '*' state.highstate
+echo Giving Salt some time to finish restarting...
+sleep 30
 
-# Start socat (yeah, still this zombie process hang problem with Salt)
+# Run highstate
+salt-call state.highstate
+
+# Start socat (yeah, still this zombie process hang problem with Salt so need to do it outside)
 invoke-rc.d socat start
