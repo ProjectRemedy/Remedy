@@ -1,6 +1,5 @@
 # This is the salt-master top file (by opposition to the bootstrap temporary top-file)
-# It must reference states and target minions according to remedy_role grains.
-# Rough, temporary example:
+# It must reference states and target minions according (at least) to remedy_role grains.
 
 base:
   '*':
@@ -11,6 +10,12 @@ base:
     - match: grain
     - server.collectd
     - server.socat
+
+# Those are common to all relays:
+  'remedy_role:relay_.*':
+    - match: grain_pcre
+    - relay.socat
+    - relay.collectd
 
   'remedy_role:relay_web':
     - match: grain
