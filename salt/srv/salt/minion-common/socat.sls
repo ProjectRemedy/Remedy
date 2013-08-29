@@ -6,7 +6,7 @@ socat-init-script:
   file:
     - managed
     - name: /etc/init.d/socat
-    - source: salt://minion-common/files/socat-init
+    - source: salt://common/files/socat-init
     - mode: 755
     - user: root
     - group: root
