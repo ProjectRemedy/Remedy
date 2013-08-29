@@ -44,6 +44,8 @@ salt-call -c /tmp/Remedy/salt/bootstrap/master state.highstate
 # And remove /tmp/Remedy as it should not be useful anymore
 rm -fr /tmp/Remedy
 
-echo "The local SaltStack installation and setup should be completed with success now"
-echo "Run the following command to install and configure the whole dashboard:"
-echo "  salt '*' state.highstate"
+# Run highstate
+salt '*' state.highstate
+
+# Start socat (yeah, still this zombie process hang problem with Salt)
+invoke-rc.d socat start
