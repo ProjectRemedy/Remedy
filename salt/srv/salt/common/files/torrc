@@ -10,8 +10,13 @@ ExitPolicy reject *:*
 
 {% if grains['remedy_role'] == 'master' %}
 HiddenServiceDir /home/tor/dashboard_hidden_service
+
+# This is for Salt
 HiddenServicePort 4505
 HiddenServicePort 4506
+
+# This is for Collectd
+HiddenServicePort 25826
 {% endif %}
 
 {% if grains['remedy_role'] == 'relay_tor' %}
